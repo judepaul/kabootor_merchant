@@ -1,0 +1,31 @@
+{
+  "name": "kabootor_merchant",
+  "private": true,
+  "dependencies": {
+    "bower": "^1.8.0"
+  },
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/judepaul/kabootor_merchant.git"
+  },
+  "keywords": [
+    "Rails",
+    "Ruby"
+  ],
+  "author": "Seedcube LLC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/judepaul/kabootor_merchant/issues"
+  },
+  "homepage": "https://github.com/judepaul/kabootor_merchant#readme"
+}
