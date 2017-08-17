@@ -1,0 +1,131 @@
+
+
+
+<div class="modal fade" id="learn-more-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="table-responsive window-90-modal-dialog" style="width:90%">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #FF4051;color: #ffffff;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: #ffffff;opacity: 1;">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Learn More</h4>
+            </div>
+		
+            <div class="modal-body">
+				<!% if UserAgent.parse(request.env["HTTP_USER_AGENT"]).mobile? %>
+			   <!-- <div class="container" style="text-align: left;text-justify: inter-word;font-family: 'Apple SD Gothic Neo';text-color:#54727f;font-size: 17px;"> -->
+				   <!% else %>
+				   <div class="learn-more-home-container">
+				   <!% end %>
+				   
+			   <!-- <br/> -->
+			   <div class="row">
+			   If you plan to send a gift to a loved one, family member, a friend or colleague then Kabootor service is for you.
+			   </div>
+			    <br/>
+			   <div class="row">
+			   We offer a unique way that allows you to wrap your gift with your emotions and feelings (expressed in a video message or image) and then deliver this message after the gift is delivered to the recipient.
+			   </div>
+			    <br/>
+			   <div class="row">
+			   We are NOT a gift store, we do NOT sell any physical gifts. You must buy the gift elsewhere, from any online or retail store of your choice. Here is how it works -
+			   </div>
+			   <br/>
+			   
+			   <!-- Content update on 08/01/2017 starts here -->
+			   
+	           <div class="row">
+		  
+	 	          <div class="col-sm-4 col-md-4 col-lg-4">
+	 	            <div class="text-center">
+            
+            
+	 	              <!%= image_tag "home/gift.svg" %>
+	 	              <!-- <p class="content-center">Record a personal video message </p> -->
+					  <br/>Are you planning to give a gift to
+					  a loved one, friend, family or co-worker?
+	 	            </div>
+	 	          </div>
+		
+	 	          <div class="col-sm-4 col-md-4 col-lg-4">
+	 	            <div class="text-center">
+	 	              <!%= image_tag "home/bird-love.svg" %>
+	 	              <!-- <p class="content-center">Enter tracking number of the gift package</p> -->
+					  <br/>Wrap your gift in your emotions and feelings (as a personal video message)
+	 	            </div>
+	 	          </div>
+	 	          <div class="col-sm-4 col-md-4 col-lg-4">
+	 	            <div class="text-center">
+            
+	 	              
+					  <!%= image_tag "home/monitor.svg" %>
+	 	              <!-- <p class="content-center">Receiver watches video<br/> after gift is delivered</p> -->
+					  <br/>The recepient can view your message right after the gift is delivered
+            
+	 	            </div>
+	 	          </div>
+	   	  	  </div>
+			   
+			   <!-- ends here -->
+			   
+			   <!-- <div class="row">
+			   Here is how it works -
+			   </div>
+			   <br/> -->
+			   <!-- <div class="row">
+			    <strong>Step 1: </strong> Buy a gift
+			   </div>
+			   <div class="row">
+			   <li>From any online (like Amazon) or retail store of your choice.</li>
+			   </div>
+			   <br/>
+			   <div class="row">
+			   <strong>Step 2: </strong> Get the Tracking Number
+			   </div>
+			   <div class="row">
+			   <li>If you purchase the gift online you see the tracking number in the purchase confirmation email</li>
+			   </div>
+			   <div class="row">
+			   <li>If you are plan to ship the gift yourself, then just remember to ask for Tracking Number at the shipping center.</li>
+			   </div>
+			   <br/>
+			   <div class="row">
+
+			   <strong>Step 3: </strong>Create your personal message
+
+			   </div>
+			   <div class="row">
+			   <li>Go to <a href="https://kabootor.com" target="_blank" class="color-text">www.kabootor.com</a> (on any device, no need for any app)</li>
+			   </div>
+			   <div class="row">
+			  <li>Click the button "Start Now", enter the tracking number, carrier/shipping name (we support USPS, UPS and FedEx ONLY), message for the receiver, name and email/phone of the receiver, your name and email/phone.</li>
+			   </div> -->
+				   
+				   
+			   <br/>
+			   <div class="row">
+			   That's it, you are done!
+			   </div>
+			   <br/>
+			   <div class="row">
+			   Kabootor service will do rest of the magic. It will email or text the link of the video or image to the receiver at the appropriate time i.e. after your gift is delivered. Receiver can then watch & download your message (on any device, no need for any app) and can also reply with a thank you note, if they wish.
+			   </div>
+			   <br/>
+			   <div class="row">
+			   Enjoy and send as many message as you like. Shoot your comments or suggestions for improments to support@kabootor.com. We always love to hear from our users.
+			   </div>
+<br/>
+			   <div class="row">
+			  :)
+			   </div>
+			   <br/>
+            </div>
+            <div class="modal-footer">
+				 <div style="text-align:center;">
+				<button type="button" class="btn btn-login" data-dismiss="modal" id="close-modal">Close</button>
+			    </div>
+				
+				 
+        	</div>
+		
+    </div>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="modal fade" id="contact-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #F35C5F; color: #ffffff;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: #ffffff;opacity: 1;">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Contact Form:</h4>
+            </div>
+		<%= form_for Contact.new do |f| %>
+            <div class="modal-body">
+			    <div class="field">
+			      <%= f.label :name %><br>
+			      <%= f.text_field :name, class: "form-control input-lg", required: true  %>
+			    </div>
+			    <div class="field">
+			      <%= f.label :email %><br>
+			      <%= f.email_field :email, class: "form-control input-lg", required: true   %>
+			    </div>
+			    <div class="field">
+					<!-- <div class="radio">
+				  <label>
+					  <!%= f.radio_button :reason, "Keep me informed about the mobile app launch", checked: true %> -->
+					  <!-- <input type="radio" name="reason" checked="checked" value="Keep me informed about the mobile app launch"> -->
+					  <!-- Keep me informed about the mobile app launch
+
+				  </label>
+			       </div> -->
+				   <div class="radio">
+				  <label>
+					  <!-- <input type="radio" name="reason" value="I’m a merchant and have a question"> -->
+					  <%= f.radio_button :reason, "I’m a merchant and have a question" %>
+					  I’m a merchant and have a question</label>
+		       </div>
+			   <div class="radio">
+				  <label >
+					  <!-- <input type="radio" name="reason" value="I’ve a general question about Kabootor"> -->
+					  <%= f.radio_button :reason, "I’ve a general question about Kabootor" %>
+					  I’ve a general question about Kabootor</label>
+		       </div>
+			   <div class="radio">
+				  <label >
+					  <!-- <input type="radio" name="reason" value="I’ve a general question about Kabootor"> -->
+					  <%= f.radio_button :reason, "Subscription" %>
+					  Subscription</label>
+		       </div>
+			   <div class="radio">
+				  <label>
+					  <!-- <input type="radio" name="reason" value="I’ve a general question about Kabootor"> -->
+					  <%= f.radio_button :reason, "I’ve an unrelated question" %>
+					  I’ve an unrelated question
+				  </label>
+			      
+			    </div> 
+			    <div class="field">
+			      <%= f.label :message %><br>
+			      <%= f.text_area :message, :size=> "35X150", class: "form-control input-lg", style: "height: 120px !important;"  %>
+			    </div>
+				
+			    <div class="field">
+					<br/>
+					<!-- <div class="g-recaptcha" data-sitekey="6LdHsiATAAAAAJjFylOW8rHBBZs6SEjuDG4ecL9D"></div> -->
+					<%#= raw recaptcha_tags %>
+			      <%#= f.label :category %><br>
+			      <%#= f.hidden_field :category, :value => "contact_form" %>
+			    </div>
+            </div>
+            <div class="modal-footer">
+				<span id="message-span" style="text-align:center;color:#FF4051;"></span>
+				<!-- <button type="button" class="btn btn-default" data-dismiss="modal" id="close-modal">Close</button> -->
+				 <div style="text-align:center;">
+				 <%= f.submit "Submit", :class => "btn btn-save", :id => "submit-contact-btn"%>
+			    </div>
+        	</div>
+		<% end %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+	$("#submit-contact-btn").on("click", function(){
+		
+		var email = $("#contact_email").val();
+		
+	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	       	 
+		if (re.test(email)){
+			 return true;
+		 } else {
+			 alert("You have entered an invalid email address!")  
+			 return false;
+		 }	
+		
+	});
+	
+	  
+	
+});
+
+</script>

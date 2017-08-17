@@ -1,3 +1,207 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import url(https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+
+
+//Landing page Navbar CSS starts here
+
+.navbar{
+	background:#F35C5F;
+	margin-bottom: 0;
+	border-radius: 0;
+	min-height: 70px;
+}
+
+.navbar-nav{
+	width:65%;
+	margin: 15.5px 45px !important;
+  li {
+  	margin-left: 8%;
+	  	a {
+	  		float: right;
+	  		font-family: "Arial Rounded MT Light" !important;
+			font-size:20px !important;
+	    	color: #ffffff !important;
+    	}
+    	a:hover,a:focus{color: #24363a;}
+
+    }
+}
+
+.nav > li > a:hover, .nav > li > a:hover{background: none;}
+
+// Landing page Navbar CSS ends here
+
+.btn-landing-signin{
+	padding: 3% 0% 0% 0%;
+	a{
+		font-family: Arial Rounded MT Light;
+		font-size:24px;
+		background: #ffffff !important;
+    border-radius: 9px;
+    color: #F35C5F !important;
+    text-decoration: none;
+    display: inline-block;
+    span{
+     font-size:24px;
+    }
+	}
+}
+
+.lnk-landing-signin{
+	a{
+		padding-top: 15px;
+		font-family: Arial Rounded MT Light;
+		font-size:18px;
+    	color: #ffffff !important;
+    	text-decoration: none;
+    	display: inline-block;
+    	span{
+     	   font-size:18px;
+    	}
+	}
+}
+
+
+.learn-more-home-container{
+	padding: 18px 6px 6px 45px;
+	text-align: justify;
+	text-justify: inter-word;
+	font-family: 'Arial Rounded MT Light';
+	text-color:#54727f;
+	font-size: 20px;
+	max-width:90%;
+	width: 100%;
+}
+
+.container-bg-img{
+	background-color: #faf9f5;
+	font-family: Arial Rounded MT Bold;
+	font-size:21px;
+	img{
+	  width:100%;
+	  height:100%;
+	}
+	.carousel-caption{
+	  left: 0;
+      padding-bottom: 30px;
+      right: 55%;
+      top: 46%;
+	}
+	.info{
+	  opacity: 0.8;  /* Opacity for Modern Browsers */
+      filter: alpha(opacity=80);  /* Opacity for IE8 and lower */
+      zoom: 1;  /* Fix for IE7 */
+	  background-color: #61625D;
+	  margin-bottom: 2%;
+	  padding: 2% 0;
+	}
+}
+.info-with-img{
+	background: #faf9f5;
+	padding: 2% 0;
+	img{
+		width:160px; 
+		height:160px;
+	}
+	.content-center{
+		font-family: Arial Rounded MT Light;
+		font-size:40px;
+		color:#393939;
+		padding: 15px;
+	}
+}
+
+.color-text{color: #f25f5c;}
+.color-text-heading{
+	color: #f25f5c;
+	font-size:18px;
+}
+
+
+.btn-start-exploring{
+	padding: 0 0 2% 0%;
+	a{
+		font-family: Arial Rounded MT Light;
+		font-size:26px;
+		background: #F35C5F;
+    border-radius: 12px;
+    color: #ffffff;
+    padding: 12px;
+    text-decoration: none;
+    display: inline-block;
+    span{
+     font-size:33px;
+    }
+	}
+	a {
+	  color: #FFF;
+	  text-decoration: none;
+	}
+	a:hover, a:focus {
+	  color: #FFF !important;
+	  text-decoration: none !important;
+	}
+}
+
+.heading-content-center {
+    color: #393939;
+font-family: Arial Rounded MT Light;
+    font-size: 35px;
+    padding: 15px;
+	text-align:center;
+}
+
+.heading-content-center-red {
+    color: #FF4051;
+font-family: Arial Rounded MT Light;
+    font-size: 42px;
+    padding: 15px;
+	text-align:center;
+}
+
+
+.window-90-modal-dialog
+{
+  max-width: 90%;
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  width: 100%;
+}
+
+
+.footer{
+	font-family: Arial Rounded MT Light;
+	font-size:16px;
+	padding :1% 0;
+	background-color: #3D3D3D;
+	color:#faf9f5;
+	a, a:hover{
+		color:#faf9f5;
+		text-decoration:none;
+	}
+}
+
+
+.header-36{
+	font-family: Arial Rounded MT Bold !important;
+	font-size:36px !important;
+}
+
+
+.content-21{
+	font-family: Arial Rounded MT Bold !important;
+	font-size:21px !important;
+}
+
+.content-24{
+	font-family: Arial Rounded MT Bold !important;
+	font-size:24px !important;
+}
+
+
+//------------  Landing page CSS ends here  -----------------
+
+

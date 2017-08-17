@@ -1,0 +1,11 @@
+<% flash.each do |name, msg| %>
+	<% unless msg.blank? %>
+		<% if msg.is_a?(String) %>
+		   	<!-- <div class="alert alert-<%= name == :notice ? "success" : "warning" %>"> -->
+			<div class="alert alert-info">
+    		   <a class="close" data-dismiss="alert">&#215;</a>
+    		   <%= content_tag :div, raw(msg), :id => "flash_#{name}" %>
+  		 	</div>
+		<% end %>
+	<% end %>
+<% end %>

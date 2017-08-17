@@ -1,0 +1,14 @@
+Hi,
+<br/>
+<p> A person has contacted you and the details are as given below. </p>
+<p>
+	Name : <%= @contact.name %><br/><br/>
+	Email: <%= @contact.email %><br/><br/>
+	Reason for contact: <%= @contact.reason %><br/><br/>
+	Message: <%= @contact.message %><br/><br/>
+	Date/Time sent: <%= @contact.created_at.strftime("%b %e, %l:%M %p") %><br/><br/>
+</p>
+<p>
+	Thanks,<br/>
+	Kabootor Support
+</p> 

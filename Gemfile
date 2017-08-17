@@ -8,6 +8,7 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.3'
+gem 'rake', '~> 10.5.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -64,4 +65,5 @@ gem 'bower-rails'
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'autoprefixer-rails'
-gem 'dotenv-rails'
+gem 'dotenv-rails', :groups => [:development, :test, :production]	# env variable to keep sensitive data hidden
+gem 'useragent'

@@ -1,0 +1,30 @@
+    <nav class="footer navbar-fixed-bottom" role="navigation">
+      <div class="container">
+        <div class="row" style="padding-top:1%">
+          <div class="col-sm-12 col-md-12 col-lg-3">
+            <div>
+              <%= link_to "Terms & Privacy", "/terms_&_privacy" %> 
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-3">
+            <a data-toggle='modal' data-target='#contact-modal' style='cursor: pointer; cursor: hand;'>Contact Us</a>
+			<!-- <a href="mailto:support@kabootor.com?Subject=Hello%20Team" target="_blank"> -->
+				<!-- <i class="fa fa-envelope-o" aria-hidden="true" style="color:#FF4051;"></i> -->
+			<!-- </a> -->
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-3">
+			  <a data-toggle='modal' data-target='#learn-more-modal' style='cursor: pointer; cursor: hand; text-decoration:none;'>Learn More</a>   			         
+		  </div>
+          <div class="col-sm-12 col-md-12 col-lg-3">
+            <p class="text-center">© 2017 Kabootor</p>
+          </div>
+        </div>
+      </div>
+    </nav>
+	<div id="contact-form-div">
+	<%= render "layouts/shared/contact_form" %>
+   </div>
+  	<div id="learn-more-div">
+  		<%= render "welcome/shared/learn_more" %>
+ 	</div>
+   

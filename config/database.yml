@@ -84,6 +84,7 @@ test:
 #
 production:
   <<: *default
-  database: kabootor_merchant_production
-  # username: kabootor_merchant
-  # password: <%= ENV['KABOOTOR_MERCHANT_DATABASE_PASSWORD'] %>
+  host: <%= ENV['KABOOTOR_MERCHANT_HOST'] %>
+  database: <%= ENV['KABOOTOR_MERCHANT_DATABASE'] %>
+  username: <%= ENV['KABOOTOR_MERCHANT_DATABASE_USERNAME'] %>
+  password: <%= ENV['KABOOTOR_MERCHANT_DATABASE_PASSWORD'] %>

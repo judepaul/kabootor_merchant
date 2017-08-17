@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
   
+  match 'create/video', to: 'dashboard#start_exploring', via: :get
+  match 'create/exploring/start',  to: "opentok#start", via: :post
   
+  
+  
+  resources :contacts
   
 end
