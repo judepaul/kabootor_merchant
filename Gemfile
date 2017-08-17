@@ -68,3 +68,4 @@ gem 'autoprefixer-rails'
 gem 'dotenv-rails', :groups => [:development, :test, :production]	# env variable to keep sensitive data hidden
 gem 'postmark-rails'
 gem 'useragent'
+gem 'opentok', '~> 2.4.1'

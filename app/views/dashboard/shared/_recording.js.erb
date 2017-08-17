@@ -1,0 +1,213 @@
+//alert('hi');
+
+$(document).ready(function() {
+
+	var sessionId = "<%= @session_new.session_id %>";
+	var apiKey = "<%= @api_key %>";
+	var token = "<%= @token %>";
+	var archive_url = null;
+	var countdowntime = <%= @counter_time %> ;
+	var file_name = null;
+	var posterImgURI = null;
+	var functioncalltime = 0;
+	var functioncalltimestart = 0;
+
+
+	var publisherOptions = {
+		showControls: false,
+		width: 990,
+		height: 417
+	};
+
+	var session = null;
+	var publisher = null;
+	var archiveID = null;
+	var systemCompatability = 0;
+
+	systemCompatability = OT.checkSystemRequirements();
+
+	if (systemCompatability == 0) {
+		// $("#left_panel_span").hide();
+		// $("#top_left_status_span").hide();
+		// $("#left_panel_browser_incompatible_span").show();
+
+	} else {
+		session = OT.initSession(apiKey, sessionId);
+		publisher = OT.initPublisher('publisher', publisherOptions);
+		session.connect(apiKey, token, function(err, info) {
+			if (err) {
+				alert(err.message || err);
+				console.log("Error connecting: ", error.name, error.message);
+			}
+			session.publish(publisher);
+
+		});
+		
+		session.on('archiveStarted', function(event) {
+			archiveID = event.id;
+			console.log('ARCHIVE STARTED --> ID' +archiveID);
+			startCountDown(null, countdowntime);
+
+			$('#get-ready-span').hide();
+			$('#stop-span').show();
+
+			var imgData = publisher.getImgData();
+			posterImgURI = "data:image/png;base64," + imgData;
+		});
+
+		session.on('archiveStopped', function(event) {
+			// alert('archiveStopped');
+			// $('#subscribers').html("<img src='" + posterImgURI + "' width='680' height='477' />");
+			$('#subscribers').html("<img src='" + posterImgURI + "' width='990' height='417' />");
+			showVideo(archiveID, posterImgURI);
+			$('#archive_id').val(archiveID);
+			archiveID = null;
+			console.log('ARCHIVE STOPPED');
+			$('#timer-display-span').hide();
+			$('#stop-span').hide();
+			$("#processing-span").show();
+
+
+		});
+		
+	}
+	
+	// ---------------  Recording Controls ---------------  
+	
+	$('#start-recording').click(function(event) {
+		// alert('start-recording');
+		onStartShowPanels();
+		startCountDownForStart(null, 6);
+	}).show();
+	
+	$('#stop-recording').click(function(event) {
+		// alert('stop-recording');
+		onStopShowPanels();
+		if (archiveID != null) {
+			$.get('/stop/' + archiveID);
+		}
+	});
+	
+	
+});
+	
+	
+
+// ---------------  Display Panel control --------------- 
+
+function defaultShowPanels() {
+
+}
+
+function onStartShowPanels() {
+	$('#start-span').hide();
+	$('#get-ready-span').show();
+}
+
+function onStopShowPanels() {
+	$('#timer-display-span').hide();
+	$('#stop-span').hide();
+}
+
+
+// ---------------  counter ---------------  
+
+var functioncalltime = 0;
+var functioncalltimestart = 0;
+
+function setCountDownTime(time) {
+	console.log(time);
+	// $('#countdowntime').html(time+1);
+	$('#timer-display-span').html('<span>'+(time+1)+'</span>');
+	if (time == 0) {
+		return -1;
+	} else {
+		return 1;
+	}
+}
+
+function setCountDownTimeForStart(time) {
+	console.log(time);
+	if (time % 2 == 0) {
+		$('#timer-display-span').append('<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw margin-bottom" style="color:#ffffff;font-size:12px;"></i>');
+	}
+	if (time == 0) {
+		return -1;
+	} else {
+		return 1;
+	}
+}
+
+	
+function startCountDown(interval, cntDwnTime) {
+	if (interval == null) {
+		// functioncalltime = countdowntime;
+		functioncalltime = cntDwnTime;
+		setCountDownTime(--functioncalltime);
+		var intervalcount = setInterval(function() {
+			startCountDown(intervalcount);
+		}, 1000);
+	} else {
+		var val = setCountDownTime(--functioncalltime);
+		if (val == -1) {
+			clearInterval(interval);
+			$('#stop-recording').click();
+		}
+	}
+}
+
+function startCountDownForStart(interval, cntDwnTime) {
+	if (interval == null) {
+		functioncalltimestart = cntDwnTime;
+		setCountDownTimeForStart(--functioncalltimestart);
+		var intervalcount = setInterval(function() {
+			startCountDownForStart(intervalcount);
+		}, 1000);
+	} else {
+		var val = setCountDownTimeForStart(--functioncalltimestart);
+		if (val == -1) {
+			clearInterval(interval);
+			var options = $('.archive-options').serialize();
+			$.post('exploring/start', options);
+
+		}
+	}
+}
+
+
+// ---------------  Processing Script to show video ---------------  
+function showVideo(archival_id, posterImgURI) {
+	var http = new XMLHttpRequest();
+	var data = new FormData();
+	data.append('img_data', posterImgURI);
+	data.append('archival_id', archival_id);
+	// http.open("GET", '/check_upload_url_status/' + archival_id, true);
+	// http.onreadystatechange = function() { //Call a function when the state changes.
+	// 	if (http.readyState == 4 && http.status == 200) {
+	// 		var obj = JSON.parse(http.responseText);
+	// 		if (obj.video_status == "uploaded") {
+	// 			console.log(obj.video_url);
+	// 			$('#subscribers').html("<video id='video1' width='680' height='477' controls poster=" + posterImgURI + "><source src=" + obj.video_url + " type='video/mp4'>Your browser does not support HTML5 video.</video>");
+	// 			$(".record-process").hide();
+	// 			$("#start-recording-message").hide();
+	// 			$("#submit-recording-message").show();
+	// 			$("#processing-span").hide();
+	// 			$("#re-record-span").show();
+	// 			session.unpublish(publisher);
+	// 		} else {
+	// 			console.log(obj.video_status);
+	// 			showVideo(archival_id, posterImgURI);
+	// 		}
+	// 	}
+	//
+	// }
+	// http.send(img_data);
+	http.open("POST", '/create/video/poster_image', true);
+	http.onreadystatechange = function() {//Call a function when the state changes.
+	    if(http.readyState == 4 && http.status == 200) {
+	        alert(http.responseText);
+	    }
+	}
+	http.send(data);
+}
+

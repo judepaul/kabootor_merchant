@@ -1,0 +1,15 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.start_video{
+	color:#faf9f5;
+	background:#525250;
+	.glyphicon-play-circle, .glyphicon-stop{
+		font-size:55px;
+		color:#faf9f5;
+	}
+	.record_link{color:#ef4e61;font-size:30px;}
+	p{font-size: 15px}
+}

@@ -89,6 +89,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   
+  #config for the recording counter
+  config.counter_time = 15
+  
   config.action_mailer.delivery_method = :postmark
   config.action_mailer.postmark_settings = { :api_key => "4b2b4bc0-e12f-408d-be41-78eaaff877b0" }
   config.postmark_signature                 = "support@kabootor.com"
