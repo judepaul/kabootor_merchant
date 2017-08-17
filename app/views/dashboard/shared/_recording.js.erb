@@ -206,7 +206,7 @@ function showVideo(archival_id, posterImgURI) {
 	http.onreadystatechange = function() {//Call a function when the state changes.
 	    if(http.readyState == 4 && http.status == 200) {
 	        // alert(http.responseText);
-			window.location.href = "/video/index/file_name = "+archival_id+".png";
+			window.location.href = "/video/index?file_name = "+archival_id+".png";
 	    }
 	}
 	http.send(data);
