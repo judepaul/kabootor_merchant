@@ -1,7 +1,6 @@
 class VideoController < ApplicationController
   include Image_data_utils
   skip_before_action :verify_authenticity_token, :only =>[:poster_image]
-  respond_to :js, :json, :html
   
   def index
   end
