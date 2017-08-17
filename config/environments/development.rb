@@ -61,7 +61,12 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  
+  # config.action_mailer.delivery_method = :postmark
+  # config.action_mailer.postmark_settings = { :api_key => "4b2b4bc0-e12f-408d-be41-78eaaff877b0" }
+  # config.postmark_signature                 = "support@kabootor.com"
+  
 end
 
-  $mailcatcher_enabled = true
+ $mailcatcher_enabled = true
 

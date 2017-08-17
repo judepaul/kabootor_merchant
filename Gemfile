@@ -66,4 +66,5 @@ gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'autoprefixer-rails'
 gem 'dotenv-rails', :groups => [:development, :test, :production]	# env variable to keep sensitive data hidden
+gem 'postmark-rails'
 gem 'useragent'
