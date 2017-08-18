@@ -1,0 +1,21 @@
+<div class="modal fade" id="customer-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #F35C5F; color: #ffffff;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: #ffffff;opacity: 1;">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Add New Customer</h4>
+            </div>
+            <div class="modal-body">
+			    <div class="field">
+			      <%= label_tag "name" %><br>
+			      <%= text_field_tag "name", "", class: "form-control input-lg", required: true  %>
+			    </div>
+			    <div class="field">
+			      <%= label_tag "email" %><br>
+			      <%= text_field_tag "email", "", class: "form-control input-lg", required: true   %>
+			    </div>
+		   </div>
+	   </div>
+   </div>
+</div>
+</div>

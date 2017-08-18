@@ -15,8 +15,8 @@ $(document).ready(function() {
 
 	var publisherOptions = {
 		showControls: false,
-		width: 990,
-		height: 417
+		width: 960,
+		height: 600
 	};
 
 	var session = null;
@@ -206,7 +206,7 @@ function showVideo(archival_id, posterImgURI) {
 	http.onreadystatechange = function() {//Call a function when the state changes.
 	    if(http.readyState == 4 && http.status == 200) {
 	        // alert(http.responseText);
-			window.location.href = "/video/index?file_name="+archival_id+".png";
+			window.location.href = "/video/index?media_id="+archival_id;
 	    }
 	}
 	http.send(data);
