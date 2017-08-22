@@ -1,0 +1,52 @@
+<div class="modal fade" id="customer-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+	<div class="table-responsive window-55-modal-dialog" style="width:55%">
+		<div class="modal-content">
+            <div class="modal-header" style="background-color: #FF4051;color: #ffffff;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: #ffffff;opacity: 1;">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Customer</h4>
+            </div>
+			<%= form_tag visitor_new_customer_path, method: :post, class: "form-horizontal", id: 'add_visitor_customer_form', multipart: true do %> 
+			<%= hidden_field_tag :page_type, "visitor" %>
+            <div class="modal-body">
+			    <div class="form-group">
+			      <div class="col-sm-12 col-md-3 col-md-offset-0 col-lg-3">
+			        <%= label_tag  :name, "Name" , :class => "control-label" %>
+			      </div>
+			      <div class="col-sm-12 col-md-6 col-lg-9">
+			        <%= text_field_tag :name, params[:name], :class =>"form-control" %>
+			      </div>
+				</div>
+			    <div class="form-group">
+			      <div class="row"></div>
+			    </div>
+			    <div class="form-group">
+			      <div class="col-sm-12 col-md-3 col-md-offset-0 col-lg-3">
+			        <%= label_tag  :email, "Email" , :class => "control-label" %>
+			      </div>
+			      <div class="col-sm-12 col-md-6 col-lg-9">
+			        <%= text_field_tag :email, params[:email], :class =>"form-control" %>
+			      </div>
+				</div>
+			    <div class="form-group">
+			      <div class="row"></div>
+			    </div>
+			    <div class="form-group">
+			      <div class="col-sm-12 col-md-3 col-md-offset-0 col-lg-3">
+			        <%= label_tag  :phone, "Phone" , :class => "control-label" %>
+			      </div>
+			      <div class="col-sm-12 col-md-6 col-lg-9">
+			        <%= text_field_tag :phone, params[:phone], :class =>"form-control" %>
+			      </div>
+				</div>
+			    <div class="form-group">
+			      <div class="row"></div>
+			    </div>
+			</div>
+		    <div class="modal-footer bg-primary-link">
+		       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		       <button type="submit" class="btn btn-info">Submit</button>
+		     </div>
+			 <% end %>
+		</div>
+	</div>
+</div>

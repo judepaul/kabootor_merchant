@@ -1,4 +1,5 @@
 require "opentok"
+require "uri"
 
 class OpentokController < ApplicationController
   include OpentokUtils
@@ -24,6 +25,28 @@ class OpentokController < ApplicationController
   
   def upload_response
     puts "The tokbox responded..! => #{params}"
+    unless params.blank?
+      visitor = Visitor.where(media_server_session_id: params[:sessionId]).first_or_create
+      visitor.temp_tenant_id = generate_random_number
+      visitor.media_server_session_id = params[:sessionId]
+      visitor.storage_provider_resource_id = params[:id] # Archive ID
+      url_params = extract_url_params(params[:url]) unless params[:url].blank?
+      visitor.storage_provider_access_key_id = url_params[:AWSAccessKeyId] unless url_params.blank?
+      visitor.media_server_name = Rails.application.secrets.MEDIA_SERVER_NAME
+      visitor.media_server_project_id = params[:projectId]
+      visitor.availability_status = AVAILABILITY_STATUS
+      visitor.storage_provider_name = Rails.application.secrets.STORAGE_PROVIDER_NAME
+      visitor.storage_provider_status = PROVIDER_STATUS
+      visitor.storage_provider_access_key_id
+      visitor.storage_provider_access_signature
+      visitor.resource_type = RESOURCE_TYPE
+      visitor.resource_availability_status = params[:status]
+      visitor.resource_uri = params[:url].gsub(/\?.*/, '') unless params[:url].blank?
+      visitor.resource_size = params[:size]
+      visitor.resource_length = params[:duration]
+      visitor.save
+    end
+    
     # archive = Archive.where(:archival_id => params[:id]).last
     # archive_status = params[:status]
     #
@@ -71,6 +94,16 @@ class OpentokController < ApplicationController
   def init_recording
     @opentok = init_opentok
     @api_key = api_key
+  end
+  
+  def generate_random_number
+    SecureRandom.uuid.gsub("-", "")
+  end
+  
+  def extract_url_params url
+    # url = "http://www.example.com/something?param1=value1&param2=value2&param3=value3"
+    uri = URI(url)
+    url_params = URI::decode_www_form(uri.query).to_h
   end
   
   

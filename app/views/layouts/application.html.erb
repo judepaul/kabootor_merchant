@@ -5,6 +5,9 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+	      type="text/css" rel="stylesheet" />
+		  
     <%= javascript_include_tag 'application' %>
 	<% unless mobile_device? %>
 		<script src="//static.opentok.com/webrtc/v2.2/js/opentok.min.js"></script>
@@ -17,15 +20,11 @@
 	<% else %>
 		<%= render :partial => "/layouts/shared/brand_with_nav_bar" %>
 	<% end %>
-	<div class="wrapper container">
 		<div id="f1">
-			<div class="row"><br/></div>
 			<%= render :partial => "/layouts/shared/flash_message" %>
 		</div>
-	</div>
-	<%= yield %>
+		<%= yield %>
     <div class="row"><br/></div>
 	<%= render :partial => "/layouts/shared/footer" %>
-
   </body>
 </html>

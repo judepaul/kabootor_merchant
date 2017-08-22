@@ -1,6 +1,6 @@
 <%= render partial: 'dashboard/shared/sidebar' %>
 
-<div class="container" id="main">
+<div class="container" id="main" style="padding-top:60px;">
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
 			<% filename = @file_name %>
@@ -14,8 +14,8 @@
 			</thead>
 			<tbody>
 				<% unless filename.blank? %>
-				<td>Video-1</td>
-				<td><a data-toggle='modal' data-target='#customer-modal' style='cursor: pointer; cursor: hand;'>Add</a></td>
+				<td><a data-toggle='modal' data-target='#video-modal' style='cursor: pointer; cursor: hand; text-decoration:none;'>Video-1(Video/MP4)</a></td>
+				<td><a data-toggle='modal' data-target='#customer-modal' style='cursor: pointer; cursor: hand;'>Add New Customer</a></td>
 				<td><span class="glyphicon glyphicon-calendar"></span></td>
 				<% end %>
 			</tbody>
@@ -25,13 +25,33 @@
 	<div class="row"><br/></div>
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-2">
-		<% unless filename.blank? %>
-			<img src="/photos/<%= filename %>.png" alt="<%= filename %>" height="350" width="400">
-		<% end %>
+
 		</div>
 	</div>
 	<div class="row"><br/></div>
 </div>
-  	<div id="learn-more-div">
-  		<%= render "video/shared/add_customer" %>
+  	<div id="customer-div">
+  		<%#= render "video/shared/add_customer" %>
+		<%= render "customers/shared/new_customer" %>
  	</div>
+
+<div class="modal fade" id="video-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+	<div class="table-responsive window-55-modal-dialog" style="width:55%">
+		<div class="modal-content">
+            <div class="modal-header" style="background-color: #FF4051;color: #ffffff;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: #ffffff;opacity: 1;">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Video</h4>
+            </div>
+		
+            <div class="modal-body">
+			   <div class="row">
+	   		<% unless @visitor.blank? && filename.blank? %>
+	   			<video id='video1' width='680' height='477' controls poster="/photos/<%= filename %>.png"><source src="<%= !@visitor.blank? ? @visitor.resource_uri : "" %>" type='video/mp4'>Your browser does not support HTML5 video.</video>
+	   		<% end %>
+			   </div>
+			    <br/>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

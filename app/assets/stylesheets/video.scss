@@ -1,3 +1,15 @@
 // Place all the styles related to the video controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.window-55-modal-dialog
+{
+  max-width: 55%;
+  position: absolute;
+  left: 3%;
+  right: 0;
+  top: 3%;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+}

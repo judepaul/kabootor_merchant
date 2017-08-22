@@ -4,6 +4,7 @@ class VideoController < ApplicationController
   
   def index
     @file_name = params[:media_id]
+    @visitor = Visitor.where(storage_provider_resource_id: params[:media_id]).last unless params[:media_id].blank?
   end
   
   def poster_image
@@ -14,5 +15,10 @@ class VideoController < ApplicationController
     end
   end
   
+  def visitor_new_customer
+    params.permit([:page_type,:name,:email,:phone])
+    p params
+    redirect_to "/customers"
+  end
   
 end

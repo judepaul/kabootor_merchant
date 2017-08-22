@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
   get 'welcome/index'
@@ -14,7 +13,9 @@ Rails.application.routes.draw do
   
   get 'video/index'
   match '/create/video/poster_image', to: "video#poster_image", via: :post
+  match 'customers/visitor/create', to: "video#visitor_new_customer", as: "visitor_new_customer", via: :post
   
   resources :contacts
+  resources :customers
   
 end
