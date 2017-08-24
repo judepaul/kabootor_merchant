@@ -73,19 +73,34 @@ class OpentokController < ApplicationController
   end
   
   def check_upload_url_status
-    archive = Archive.where(:archival_id => params[:archive_id]).last
-    if !archive.blank?
-    render json: 
-    {
-      video_url: archive.archival_url,
-      video_status: archive.archival_status
-      }.to_json
+    visitor = Visitor.where(storage_provider_resource_id: params[:archive_id]).last
+    p "!!!!!!!!!!"
+    p visitor
+    if !visitor.blank? && !visitor.resource_uri.blank?
+      render json:
+        {
+          video_url: visitor.resource_uri,
+          video_status: visitor.storage_provider_status
+        }
     else
-      render json: 
-      {
-        video_status: "not_uploaded"
+      render json:
+        {
+          video_status: "not_uploaded"
         }.to_json
     end
+    # archive = Archive.where(:archival_id => params[:archive_id]).last
+    # if !archive.blank?
+    # render json:
+    # {
+    #   video_url: archive.archival_url,
+    #   video_status: archive.archival_status
+    #   }.to_json
+    # else
+    #   render json:
+    #   {
+    #     video_status: "not_uploaded"
+    #     }.to_json
+    # end
     
   end
   

@@ -1,10 +1,20 @@
-<%= render partial: 'dashboard/shared/sidebar' %>
+<div class="wrapper">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <!-- sidebar -->
+			<%= render partial: 'dashboard/shared/sidebar' %>
 
-<div class="container" id="main">
-	<div class="row"><br/></div>
-    <div class="row">
-        <div class="col-md-12">
-            <h4>This is suppose to be in the main content</h4>
+        <!-- /sidebar -->
+
+        <!-- main right col -->
+        <div class="column start_video col-sm-9 col-xs-11 col-md-9 col-lg-9" id="main">
+            <!-- <p><a href="#" data-toggle="offcanvas"><i class="fa fa-navicon fa-2x"></i></a></p> -->
+            <p>
+                Main content...
+            </p>
         </div>
+        <!-- /main -->
     </div>
 </div>
+
+
+

@@ -13,7 +13,14 @@
 			</tr>
 			</thead>
 			<tbody>
-				
+				<% unless @visitor.blank? %>
+					<% @visitor.each_with_index do |visitor, indx| %>
+						<td><%= indx+1 %></td>
+						<td><%= visitor.receiver_name %></td>
+						<td><%= visitor.receiver_email %></td>
+						<td><%= visitor.receiver_phone %></td>
+					<% end %>
+				<% end %>
 			</tbody>
 			</table>	
         </div>

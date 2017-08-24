@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
   
+  get 'dashboard/index'
   match 'create/video', to: 'dashboard#start_exploring', via: :get
 
   match 'create/exploring/start',  to: "opentok#start", via: :post
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
   get 'video/index'
   match '/create/video/poster_image', to: "video#poster_image", via: :post
   match 'customers/visitor/create', to: "video#visitor_new_customer", as: "visitor_new_customer", via: :post
+  
+  match 'create/video', to: "video#visitor_video_details", as: "visitor_new_video_detail", via: :post
   
   resources :contacts
   resources :customers

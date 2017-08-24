@@ -32,7 +32,7 @@
 </div>
   	<div id="customer-div">
   		<%#= render "video/shared/add_customer" %>
-		<%= render "customers/shared/new_customer" %>
+		<%= render "customers/shared/new_customer", :locals => { :media_id => !@visitor.blank? ? !@visitor.storage_provider_resource_id.blank? ? !@visitor.storage_provider_resource_id : "" : "" } %>
  	</div>
 
 <div class="modal fade" id="video-modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">

@@ -3,6 +3,11 @@
 @import "bootstrap";
 @import url(https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
 
+html,
+body {
+    height: 100%;
+	padding-top:80px;
+}
 
 //Landing page Navbar CSS starts here
 

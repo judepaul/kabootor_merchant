@@ -7,6 +7,7 @@
             </div>
 			<%= form_tag visitor_new_customer_path, method: :post, class: "form-horizontal", id: 'add_visitor_customer_form', multipart: true do %> 
 			<%= hidden_field_tag :page_type, "visitor" %>
+			<%= hidden_field_tag :media, params[:media_id] %>
             <div class="modal-body">
 			    <div class="form-group">
 			      <div class="col-sm-12 col-md-3 col-md-offset-0 col-lg-3">

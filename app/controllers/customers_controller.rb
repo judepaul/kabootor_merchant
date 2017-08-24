@@ -4,7 +4,9 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    @customers = Customer.all
+    # @customers = Customer.all
+    p params[:media]
+    @visitor = Visitor.where(storage_provider_resource_id: params[:media]) unless params[:media].blank?
   end
 
   # GET /customers/1

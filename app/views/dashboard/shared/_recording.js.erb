@@ -15,8 +15,8 @@ $(document).ready(function() {
 
 	var publisherOptions = {
 		showControls: false,
-		width: 960,
-		height: 600
+		width: 640,
+		height: 417
 	};
 
 	var session = null;
@@ -58,7 +58,7 @@ $(document).ready(function() {
 		session.on('archiveStopped', function(event) {
 			// alert('archiveStopped');
 			// $('#subscribers').html("<img src='" + posterImgURI + "' width='680' height='477' />");
-			$('#subscribers').html("<img src='" + posterImgURI + "' width='990' height='417' />");
+			$('#subscribers').html("<img src='" + posterImgURI + "' width='640' height='417' />");
 			showVideo(archiveID, posterImgURI);
 			$('#archive_id').val(archiveID);
 			archiveID = null;
@@ -87,6 +87,16 @@ $(document).ready(function() {
 			$.get('/stop/' + archiveID);
 		}
 	});
+	
+	
+	// ------------ Next Page --------------
+	
+	$('#recording-next-btn').click(function (event) {
+		$('#visitor-recording-span').hide();
+		$('re-recording-message').hide();
+		$('#visitor-video-detail-span').show();
+	});
+	
 	
 	
 });
@@ -181,34 +191,34 @@ function showVideo(archival_id, posterImgURI) {
 	var data = new FormData();
 	data.append('img_data', posterImgURI);
 	data.append('archival_id', archival_id);
-	// http.open("GET", '/check_upload_url_status/' + archival_id, true);
-	// http.onreadystatechange = function() { //Call a function when the state changes.
-	// 	if (http.readyState == 4 && http.status == 200) {
-	// 		var obj = JSON.parse(http.responseText);
-	// 		if (obj.video_status == "uploaded") {
-	// 			console.log(obj.video_url);
-	// 			$('#subscribers').html("<video id='video1' width='680' height='477' controls poster=" + posterImgURI + "><source src=" + obj.video_url + " type='video/mp4'>Your browser does not support HTML5 video.</video>");
-	// 			$(".record-process").hide();
-	// 			$("#start-recording-message").hide();
-	// 			$("#submit-recording-message").show();
-	// 			$("#processing-span").hide();
-	// 			$("#re-record-span").show();
-	// 			session.unpublish(publisher);
-	// 		} else {
-	// 			console.log(obj.video_status);
-	// 			showVideo(archival_id, posterImgURI);
-	// 		}
-	// 	}
-	//
-	// }
-	// http.send(img_data);
-	http.open("POST", '/create/video/poster_image', true);
-	http.onreadystatechange = function() {//Call a function when the state changes.
-	    if(http.readyState == 4 && http.status == 200) {
-	        // alert(http.responseText);
-			window.location.href = "/video/index?media_id="+archival_id;
-	    }
+	http.open("GET", '/check_upload_url_status/' + archival_id, true);
+	http.onreadystatechange = function() { //Call a function when the state changes.
+		if (http.readyState == 4 && http.status == 200) {
+			var obj = JSON.parse(http.responseText);
+			if (obj.video_status == "uploaded") {
+				console.log(obj.video_url);				
+				$('#subscribers').html("<video id='video1' width='640' height='417' controls poster=" + posterImgURI + "><source src=" + obj.video_url + " type='video/mp4'>Your browser does not support HTML5 video.</video>");
+				$(".record-process").hide();
+				$("#start-recording-message").hide();
+				$("#submit-recording-message").show();
+				$("#processing-span").hide();
+				$("#re-record-span").show();
+				session.unpublish(publisher);
+			} else {
+				console.log(obj.video_status);
+				showVideo(archival_id, posterImgURI);
+			}
+		}
+
 	}
 	http.send(data);
+	// http.open("POST", '/create/video/poster_image', true);
+	// http.onreadystatechange = function() {//Call a function when the state changes.
+	//     if(http.readyState == 4 && http.status == 200) {
+	//         // alert(http.responseText);
+	// 		// window.location.href = "/video/index?media_id="+archival_id;
+	//     }
+	// }
+	// http.send(data);
 }
 

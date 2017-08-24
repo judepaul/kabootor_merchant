@@ -16,9 +16,18 @@ class VideoController < ApplicationController
   end
   
   def visitor_new_customer
-    params.permit([:page_type,:name,:email,:phone])
+    # params.require(:video).permit(:name)
+    params.permit(:utf8, :authenticity_token, :media, :page_type, :name, :email, :phone)
     p params
-    redirect_to "/customers"
+    redirect_to customers_path(media: params[:media])
+  end
+  
+  def visitor_video_details
+    p "!!!!!!!!!!!!!!!!"
+    render json:
+      {
+        video_details_status: "saved"
+      }.to_json
   end
   
 end

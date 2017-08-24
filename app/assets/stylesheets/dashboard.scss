@@ -5,11 +5,34 @@
 
 .start_video{
 	color:#faf9f5;
-	background:#525250;
+	//background:#525250;
 	.glyphicon-play-circle, .glyphicon-stop{
 		font-size:55px;
 		color:#faf9f5;
 	}
 	.record_link{color:#ef4e61;font-size:30px;}
 	p{font-size: 15px}
+}
+
+.top-div {
+  position: fixed; /* or absolute */
+  top: 20%;
+}
+
+.center-div {
+  position: fixed; /* or absolute */
+  top: 45%;
+}
+
+
+.bottom-div {
+  position: fixed; /* or absolute */
+  bottom: 20%;
+  left: 60%;
+}
+
+.fill { 
+    min-height: 100%;
+    height: 100%;
+	top: 40%;
 }
