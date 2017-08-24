@@ -12,7 +12,7 @@
 <!-- <a href="#" id="back-button">
 <i class="fa fa-arrow-left center-div" style="color:#ffffff;font-size:40px;padding-top:10%;"></i>
 </a> -->
-<span id="re-recording-message" style="display:inline;">
+<span id="re-recording-message" style="display:none;">
 <p class=""><!-- Do you want to re-record the message? --><a href="/create/video" id="re-record" class="btn btn-danger" style="cursor: pointer; cursor: hand; color:#FFF; font-weight:bold;">Re-Record</a></p>
 </span>
 </div>
@@ -32,7 +32,7 @@
  	<!-- <a href="#" id="back-button">
  	<i class="fa fa-arrow-right center-div" style="color:#ffffff;font-size:40px;padding-top:10%;"></i>
  	</a> -->
-<span id="re-record-span" style="display:inline;">
+<span id="re-record-span" style="display:none;">
 <p class="btn btn-danger"><a href="#" id="recording-next-btn" class="" style="cursor: pointer; cursor: hand;  color:#FFF; font-weight:bold;"><strong>Next</strong></a></p>
 <!-- <p>If you are happy with your recording, click Next.</p> -->
 </span>
@@ -43,7 +43,6 @@
 </span>
 
 <span id="visitor-video-detail-span" style="display:none;">
-<%= form_tag visitor_new_video_detail_path, method: :post, class: "form-horizontal", id: 'add_visitor_video_detail_form', multipart: true do %> 
 <div class="row"><br/></div>
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-3">
@@ -85,6 +84,5 @@
      </div>
 </div>
 <div class="row"><br/></div>
-<% end %>	
 </span>
 </div>
