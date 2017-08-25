@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170822113838) do
+ActiveRecord::Schema.define(version: 20170825131022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 20170822113838) do
     t.text "receiver_name"
     t.text "receiver_email"
     t.text "receiver_phone"
-    t.text "video_title"
     t.boolean "is_abondon"
     t.text "browser_name"
     t.text "browser_version"
@@ -59,6 +58,7 @@ ActiveRecord::Schema.define(version: 20170822113838) do
     t.text "os_version"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "video_title"
   end
 
 end
