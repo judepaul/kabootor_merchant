@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   match '/create/video/poster_image', to: "video#poster_image", via: :post
   match 'customers/visitor/create', to: "video#visitor_new_customer", as: "visitor_new_customer", via: :post
   
-  match 'create/video/visitor/:page_type', to: "video#visitor_video_details", via: :get
+  match 'create/video/visitor/', to: "video#visitor_video_details", via: :post
   
   resources :contacts
   resources :customers

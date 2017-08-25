@@ -43,6 +43,7 @@
 </span>
 
 <span id="visitor-video-detail-span" style="display:none;">
+<input type="hidden" name= "video_detail_session_id">
 <div class="row"><br/></div>
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-3">
@@ -76,13 +77,53 @@
  	<i class="fa fa-arrow-right center-div" style="color:#ffffff;font-size:40px;padding-top:10%;"></i>
  	</a> -->
 <span id="re-record-span" style="display:inline;">
-<!-- <p class="btn btn-danger"><a href="#" id="recording-next-btn" class="" style="cursor: pointer; cursor: hand;  color:#FFF; font-weight:bold;"><strong>Next</strong></a></p> -->
-	<button type="submit" class="btn btn-danger" style="cursor: pointer; cursor: hand;  color:#FFF; font-weight:bold;"><strong>Submit</strong></button>
+<p class="btn btn-danger"><a href="#" id="video-detail-next-btn" class="" style="cursor: pointer; cursor: hand;  color:#FFF; font-weight:bold;"><strong>Next</strong></a></p>
+	<!-- <button type="submit" class="btn btn-danger" style="cursor: pointer; cursor: hand;  color:#FFF; font-weight:bold;"><strong>Submit</strong></button> -->
 <!-- <p>If you are happy with your recording, click Next.</p> -->
 </span>
  	</div>
      </div>
 </div>
 <div class="row"><br/></div>
+</span>
+
+<span id="visitor-scheduler-detail-span" style="display:none;">
+<input type="hidden" name= "video_schedule_session_id">
+	<div class="row"><br/></div>
+	<div class="row">
+	    <div class="col-sm-12 col-md-12 col-lg-3">
+	      <div class="row">
+	 <%= render partial: 'dashboard/shared/sidebar' %>
+	      </div>
+	    </div>
+	   <div class="col-sm-12 col-md-12 col-lg-1">
+	  <div class="row text-right" style="padding-top:380px;">
+	<!-- <a href="#" id="back-button">
+	<i class="fa fa-arrow-left center-div" style="color:#ffffff;font-size:40px;padding-top:10%;"></i>
+	</a> -->
+	<span id="re-recording-message" style="display:inline;">
+	<p class=""><!-- Do you want to re-record the message? --><a href="#" id="visitor-schedule-back" class="btn btn-danger" style="cursor: pointer; cursor: hand; color:#FFF; font-weight:bold;">Back</a></p>
+	</span>
+	</div>
+	    </div>
+	     <div class="col-sm-12 col-md-12 col-lg-7">
+	       <div class="row">
+			   <%= render partial: 'dashboard/desktop/video_schedule' %>
+	       </div>
+	     </div>
+	    <div class="col-sm-12 col-md-12 col-lg-1">
+	 	  <div class="row text-left" style="padding-top:380px;">
+	 	<!-- <a href="#" id="back-button">
+	 	<i class="fa fa-arrow-right center-div" style="color:#ffffff;font-size:40px;padding-top:10%;"></i>
+	 	</a> -->
+	<span id="re-record-span" style="display:inline;">
+	<p class="btn btn-danger"><a href="#" id="video-detail-next-btn" class="" style="cursor: pointer; cursor: hand;  color:#FFF; font-weight:bold;"><strong>Submit</strong></a></p>
+		<!-- <button type="submit" class="btn btn-danger" style="cursor: pointer; cursor: hand;  color:#FFF; font-weight:bold;"><strong>Submit</strong></button> -->
+	<!-- <p>If you are happy with your recording, click Next.</p> -->
+	</span>
+	 	</div>
+	     </div>
+	</div>
+	<div class="row"><br/></div>
 </span>
 </div>

@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20170822113838) do
     t.text "receiver_name"
     t.text "receiver_email"
     t.text "receiver_phone"
+    t.text "video_title"
     t.boolean "is_abondon"
     t.text "browser_name"
     t.text "browser_version"

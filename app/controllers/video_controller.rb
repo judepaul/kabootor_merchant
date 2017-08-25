@@ -1,6 +1,6 @@
 class VideoController < ApplicationController
   include Image_data_utils
-  skip_before_action :verify_authenticity_token, :only =>[:poster_image]
+  skip_before_action :verify_authenticity_token, :only =>[:poster_image, :visitor_video_details]
   
   def index
     @file_name = params[:media_id]
@@ -23,11 +23,24 @@ class VideoController < ApplicationController
   end
   
   def visitor_video_details
-    p "!!!!!!!!!!!!!!!!"
+    params.permit(:utf8, :authenticity_token, :page_type, :session_id, :video_name, :customer_type, :customer_name, :customer_email, :customer_phone)
+    visitor = Visitor.where(media_server_session_id: params[:session_id]).last unless params[:session_id].blank?
+    if visitor.update_attributes(video_title: params[:video_name], receiver_name: params[:customer_name], receiver_email: params[:customer_email], receiver_phone: params[:customer_phone])
     render json:
       {
+        session_id: params[:session_id],
+        video_name: params[:video_name], 
+        customer_name: params[:customer_name], 
+        customer_email: params[:customer_email], 
+        customer_phone: params[:customer_phone],
         video_details_status: "saved"
       }.to_json
+    else
+      render json:
+        {
+          video_details_status: "not saved"
+        }.to_json
+    end
   end
   
 end

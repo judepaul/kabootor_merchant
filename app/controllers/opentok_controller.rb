@@ -79,6 +79,7 @@ class OpentokController < ApplicationController
     if !visitor.blank? && !visitor.resource_uri.blank?
       render json:
         {
+          media_session: visitor.media_server_session_id,
           video_url: visitor.resource_uri,
           video_status: visitor.storage_provider_status
         }

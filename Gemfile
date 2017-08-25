@@ -69,3 +69,9 @@ gem 'dotenv-rails', :groups => [:development, :test, :production]	# env variable
 gem 'postmark-rails'
 gem 'useragent'
 gem 'opentok', '~> 2.4.1'
+
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
+gem 'clockpicker-rails'
+
+gem 'jquery-validation-rails'
