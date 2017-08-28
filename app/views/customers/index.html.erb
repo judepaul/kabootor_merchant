@@ -28,7 +28,9 @@
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-9">
 			<%#= link_to 'Add New Customer', new_customer_path, class: "text-right" %>
-			<a data-toggle='modal' data-target='#customer-modal' style='cursor: pointer; cursor: hand;'>Add New Customer</a>
+			<% unless @visitor.blank? %>
+				<a style='cursor: pointer; cursor: hand;' onclick="return alert('Visitors are not allowed to add more than one customer.')">Add New Customer</a>
+			<% end %>
 		</div>
 	</div>
 </div>

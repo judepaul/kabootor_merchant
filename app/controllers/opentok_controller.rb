@@ -3,8 +3,9 @@ require "uri"
 
 class OpentokController < ApplicationController
   include OpentokUtils
+  include ImageDataUtils
   before_action :init_recording, only: [:start, :stop, :upload_response]
-  skip_before_action :verify_authenticity_token, :only =>[:start, :stop, :upload_response]
+  skip_before_action :verify_authenticity_token, :only =>[:start, :stop, :upload_response, :check_upload_url_status]
   
   def start
     archive = @opentok.archives.create params[:session_id], {
@@ -73,9 +74,14 @@ class OpentokController < ApplicationController
   end
   
   def check_upload_url_status
-    visitor = Visitor.where(storage_provider_resource_id: params[:archive_id]).last
-    p "!!!!!!!!!!"
-    p visitor
+    visitor = Visitor.where(media_server_session_id: params[:session_id]).last unless params[:session_id].blank?
+    unless params[:img_data].blank? && params[:archival_id].blank?
+      poster_image_file = convert_image_data_uri_to_image(USER_TYPE_VISITOR, params[:img_data], params[:archival_id])
+      visitor.poster_image_filename = poster_image_file
+      visitor.poster_image_location = POSTER_IMAGE_VISITOR_DIRECTORY
+      visitor.poster_image_status = POSTER_IMAGE_STATUS
+      visitor.save
+    end
     if !visitor.blank? && !visitor.resource_uri.blank?
       render json:
         {

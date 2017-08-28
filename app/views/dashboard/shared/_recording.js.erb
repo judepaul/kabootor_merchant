@@ -59,7 +59,8 @@ $(document).ready(function() {
 			// alert('archiveStopped');
 			// $('#subscribers').html("<img src='" + posterImgURI + "' width='680' height='477' />");
 			$('#subscribers').html("<img src='" + posterImgURI + "' width='640' height='417' />");
-			showVideo(archiveID, posterImgURI);
+			// alert(sessionId);
+			showVideo(sessionId, archiveID, posterImgURI);
 			$('#archive_id').val(archiveID);
 			archiveID = null;
 			console.log('ARCHIVE STOPPED');
@@ -120,6 +121,22 @@ $(document).ready(function() {
 		$('#visitor-video-detail-span').show();
 		$('#visitor-scheduler-detail-span').hide();
 	});
+	
+	
+	$('#video-schedule-submit-btn').click(function (event) {
+		var session_id = $('input[name=video_schedule_session_id]').val();
+		var visitor_id = $('input[name=visitor_id]').val();
+		var schedule_date = $("#datepicker").val();
+		var schedule_time = $("#timepicker").val();
+		if(schedule_date.length>0 && schedule_time.length>0)
+		{
+			alert("It seem's your are not yet register for Kabootor service, so we are unable to deliver your scheduled message to the customer. You are allowed to preview/download the video and view customer details.");
+			this.href="/video/index?visitor_id="+visitor_id;
+		}else{
+			alert("Please enter the date and time to schedule your video");
+		} 
+		
+	});	
 	
 	
 });
@@ -209,12 +226,15 @@ function startCountDownForStart(interval, cntDwnTime) {
 
 
 // ---------------  Processing Script to show video ---------------  
-function showVideo(archival_id, posterImgURI) {
+function showVideo(session_id, archival_id, posterImgURI) {
 	var http = new XMLHttpRequest();
 	var data = new FormData();
+	data.append('session_id', session_id);
 	data.append('img_data', posterImgURI);
 	data.append('archival_id', archival_id);
-	http.open("GET", '/check_upload_url_status/' + archival_id, true);
+	// http.open("GET", '/check_upload_url_status/' + archival_id, true);
+	// Updated on 28/08/2017 to save the post image based on the sessionId
+	http.open("POST", '/check_upload_url_status/', true);
 	http.onreadystatechange = function() { //Call a function when the state changes.
 		if (http.readyState == 4 && http.status == 200) {
 			var obj = JSON.parse(http.responseText);
@@ -230,10 +250,10 @@ function showVideo(archival_id, posterImgURI) {
 				$("#processing-span").hide();
 				$("#re-recording-message").show();
 				$("#re-record-span").show();
-				session.unpublish(publisher);
+				//session.unpublish(publisher);
 			} else {
 				console.log(obj.video_status);
-				showVideo(archival_id, posterImgURI);
+				showVideo(sessionId, archival_id, posterImgURI);
 			}
 		}
 
@@ -267,6 +287,8 @@ function showScheduler(pageType, session_id,video_name, customer_type, customer_
 			var obj = JSON.parse(http.responseText);
 			if (obj.video_details_status == "saved") {
 				//$('#subscribers').html("<video id='video1' width='640' height='417' controls poster=" + posterImgURI + "><source src=" + obj.video_url + " type='video/mp4'>Your browser does not support HTML5 video.</video>");
+				alert(obj.visitor_id);
+				$('input[name=visitor_id]').val(obj.visitor_id);
 				$('input[name=video_schedule_session_id]').val(obj.session_id);
 				$('input[name=video_name]').val(obj.video_name);
 				$('input[name=customer_type]').val("new");

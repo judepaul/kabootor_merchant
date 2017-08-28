@@ -21,6 +21,9 @@ class CreateVisitors < ActiveRecord::Migration[5.1]
       t.text :receiver_name
       t.text :receiver_email
       t.text :receiver_phone
+      t.text :poster_image_filename
+      t.text :poster_image_location
+      t.text :poster_image_status
       t.boolean :is_abondon
       t.text :browser_name
       t.text :browser_version

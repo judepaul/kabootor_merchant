@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   match 'create/exploring/start',  to: "opentok#start", via: :post
   match '/stop/:archive_id',  to: "opentok#stop", via: :get
   match '/opentok/upload_response', to: "opentok#upload_response", via: :post
-  match '/check_upload_url_status/:archive_id',  to: "opentok#check_upload_url_status", via: :get
+  # match '/check_upload_url_status/:archive_id',  to: "opentok#check_upload_url_status", via: :get
+  match '/check_upload_url_status',  to: "opentok#check_upload_url_status", via: :post
   
   get 'video/index'
   match '/create/video/poster_image', to: "video#poster_image", via: :post

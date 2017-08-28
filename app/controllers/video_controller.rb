@@ -1,10 +1,12 @@
 class VideoController < ApplicationController
-  include Image_data_utils
   skip_before_action :verify_authenticity_token, :only =>[:poster_image, :visitor_video_details]
   
   def index
-    @file_name = params[:media_id]
-    @visitor = Visitor.where(storage_provider_resource_id: params[:media_id]).last unless params[:media_id].blank?
+    if params[:visitor_id].blank?
+      
+    else
+      @visitor = Visitor.find(params[:visitor_id])
+    end
   end
   
   def poster_image
@@ -28,6 +30,7 @@ class VideoController < ApplicationController
     if visitor.update_attributes(video_title: params[:video_name], receiver_name: params[:customer_name], receiver_email: params[:customer_email], receiver_phone: params[:customer_phone])
     render json:
       {
+        visitor_id: visitor.id,
         session_id: params[:session_id],
         video_name: params[:video_name], 
         customer_name: params[:customer_name], 
