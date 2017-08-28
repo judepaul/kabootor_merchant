@@ -287,7 +287,7 @@ function showScheduler(pageType, session_id,video_name, customer_type, customer_
 			var obj = JSON.parse(http.responseText);
 			if (obj.video_details_status == "saved") {
 				//$('#subscribers').html("<video id='video1' width='640' height='417' controls poster=" + posterImgURI + "><source src=" + obj.video_url + " type='video/mp4'>Your browser does not support HTML5 video.</video>");
-				alert(obj.visitor_id);
+				// alert(obj.visitor_id);
 				$('input[name=visitor_id]').val(obj.visitor_id);
 				$('input[name=video_schedule_session_id]').val(obj.session_id);
 				$('input[name=video_name]').val(obj.video_name);
