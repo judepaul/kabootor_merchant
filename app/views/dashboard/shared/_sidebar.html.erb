@@ -9,14 +9,26 @@
                 </a>
             </li>
             <li <%= controller.controller_name == "video" ?  "class=active" : "" %>>
+				<% if params[:visitor_id].blank? %>
                 <a href="/video/index">
                     <span class="glyphicon glyphicon-facetime-video"></span> Videos
                 </a>
+				<% else %>
+                <a href="/video/index?visitor_id=<%= params[:visitor_id] %>">
+                    <span class="glyphicon glyphicon-facetime-video"></span> Videos
+                </a>				
+				<% end %>
             </li>
             <li <%= controller.controller_name == "customers" ?  "class=active" : "" %>>
-                <a href="/customers">
+                <% if params[:visitor_id].blank? %>
+				<a href="/customers">
                     <span class="glyphicon glyphicon-user"></span> Customers
                 </a>
+				<% else %>
+                <a href="/customers?visitor_id=<%= params[:visitor_id] %>">
+                    <span class="glyphicon glyphicon-facetime-video"></span> Customers
+                </a>
+				<% end %>
             </li>
             <li>
                 <a href="">
