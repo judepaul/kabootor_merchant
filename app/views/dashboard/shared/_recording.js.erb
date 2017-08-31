@@ -112,12 +112,10 @@ $(document).ready(function() {
 		var customer_name=$.trim($("#customer_name").val()); 
 		var customer_email=$.trim($("#customer_email").val()); 
 		var customer_phone=$.trim($("#customer_phone").val());
-		if(video_name.length>0 && customer_name.length>0 && customer_email.length>0)
-		{
+		var validate_status = validate_video_detail_form();
+		if(validate_status){
 		 	showScheduler('visitors-video-details', session_id,video_name,customer_type,customer_name,customer_email,customer_phone);
-		}else{
-			alert("Please enter the values for all the mandatory fields")
-		} 
+		}
 	});
 	
 	$('#visitor-schedule-back').click(function (event) {
@@ -334,3 +332,50 @@ function savePosterImgURI(session_id, archive_id, posterImgURI) {
 	}
 	http.send(data);
 }
+
+
+
+
+function validate_video_detail_form(){
+	var ret_flag = false;
+	var valid_email_flag = false;
+	var valid_customer_email_flag = false;
+	
+	var video_name_flag = $("#video_name").val() != null && $("#video_name").val() != "";
+	if(!video_name_flag) {
+		$("#video_name_required_div").show();
+	}else{
+		$("#video_name_required_div").hide();
+	}
+	
+	var customer_name_flag = $("#customer_name").val() != null && $("#customer_name").val() != "";
+	if(!customer_name_flag) {
+		$("#customer_name_required_div").show();
+	}else{
+		$("#customer_name_required_div").hide();
+	}
+	
+	var customer_email_flag = $("#customer_email").val() != null && $("#customer_email").val() != "";
+	if(!customer_email_flag) {
+		$("#customer_email_required_div").show();
+	}else{
+		$("#customer_email_required_div").hide();
+		valid_customer_email_flag = isValidEmailAddress($("#customer_email").val());
+		if(!valid_customer_email_flag){
+			$("#customer_email_invalid_div").show();
+		}else{
+			$("#customer_email_invalid_div").hide();
+		}
+	}
+		
+	ret_flag = video_name_flag && customer_name_flag && customer_email_flag;
+	
+	return ret_flag;
+}
+
+
+function isValidEmailAddress(emailAddress) {
+    var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+    return pattern.test(emailAddress);
+};
+
