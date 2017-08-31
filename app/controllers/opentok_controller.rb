@@ -74,27 +74,44 @@ class OpentokController < ApplicationController
   end
   
   def check_upload_url_status
+    p "!!!!!!!!!!!"
+    p params
+    p "params[:session_id] ==> #{params[:session_id]}"
     visitor = Visitor.where(media_server_session_id: params[:session_id]).last unless params[:session_id].blank?
-    unless params[:img_data].blank? && params[:archival_id].blank?
-      poster_image_file = convert_image_data_uri_to_image(USER_TYPE_VISITOR, params[:img_data], params[:archival_id])
-      visitor.poster_image_filename = poster_image_file
-      visitor.poster_image_location = POSTER_IMAGE_VISITOR_DIRECTORY
-      visitor.poster_image_status = POSTER_IMAGE_STATUS
-      visitor.save
-    end
-    if !visitor.blank? && !visitor.resource_uri.blank?
+    if !visitor.blank?
       render json:
-        {
-          media_session: visitor.media_server_session_id,
-          video_url: visitor.resource_uri,
-          video_status: visitor.storage_provider_status
-        }
+      {
+        media_session: visitor.media_server_session_id,
+        video_url: visitor.resource_uri,
+        video_status: visitor.resource_availability_status
+      }.to_json
     else
       render json:
-        {
-          video_status: "not_uploaded"
-        }.to_json
+      {
+        video_status: "not_uploaded"
+      }.to_json
     end
+    # visitor = Visitor.where(media_server_session_id: params[:session_id]).last unless params[:session_id].blank?
+    # unless params[:img_data].blank? && params[:archival_id].blank?
+    #   poster_image_file = convert_image_data_uri_to_image(USER_TYPE_VISITOR, params[:img_data], params[:archival_id])
+    #   visitor.poster_image_filename = poster_image_file
+    #   visitor.poster_image_location = POSTER_IMAGE_VISITOR_DIRECTORY
+    #   visitor.poster_image_status = POSTER_IMAGE_STATUS
+    #   visitor.save
+    # end
+    # if !visitor.blank? && !visitor.resource_uri.blank?
+    #   render json:
+    #     {
+    #       media_session: visitor.media_server_session_id,
+    #       video_url: visitor.resource_uri,
+    #       video_status: visitor.storage_provider_status
+    #     }
+    # else
+    #   render json:
+    #     {
+    #       video_status: "not_uploaded"
+    #     }.to_json
+    # end
     # archive = Archive.where(:archival_id => params[:archive_id]).last
     # if !archive.blank?
     # render json:

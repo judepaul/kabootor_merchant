@@ -1,4 +1,5 @@
 class VideoController < ApplicationController
+  include ImageDataUtils
   skip_before_action :verify_authenticity_token, :only =>[:poster_image, :visitor_video_details]
   
   def index
@@ -10,11 +11,25 @@ class VideoController < ApplicationController
   end
   
   def poster_image
-    file_name = convert_image_data_uri_to_image(params[:img_data], params[:archival_id]) if !params[:img_data].blank?
-    # file_name = "photo_9b44cfa0-8578-40d7-8665-40ec3011e3d0.png"
-    respond_to do |format|
-      format.html { redirect_to video_index_path(:media_id => file_name, format: :html) } 
-    end
+     visitor = Visitor.where(media_server_session_id: params[:session_id]).last unless params[:session_id].blank?
+     unless params[:img_data].blank? && params[:archival_id].blank?
+       poster_image_file = convert_image_data_uri_to_image(USER_TYPE_VISITOR, params[:img_data], params[:archive_id])
+       visitor.poster_image_filename = poster_image_file.blank? ? "default-placeholder" : poster_image_file
+       visitor.poster_image_location = POSTER_IMAGE_VISITOR_DIRECTORY
+       visitor.poster_image_status = POSTER_IMAGE_STATUS
+       visitor.save
+     end
+     if !visitor.blank? && !visitor.resource_uri.blank?
+       render json:
+         {
+           image_status: visitor.poster_image_status
+         }
+     else
+       render json:
+         {
+           image_status: "not_created"
+         }.to_json
+     end
   end
   
   def visitor_new_customer
