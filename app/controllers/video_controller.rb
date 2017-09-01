@@ -14,7 +14,7 @@ class VideoController < ApplicationController
      visitor = Visitor.where(media_server_session_id: params[:session_id]).last unless params[:session_id].blank?
      unless params[:img_data].blank? && params[:archival_id].blank?
        poster_image_file = convert_image_data_uri_to_image(USER_TYPE_VISITOR, params[:img_data], params[:archive_id])
-       visitor.poster_image_filename = poster_image_file.blank? ? "default-placeholder" : poster_image_file
+       visitor.poster_image_filename = poster_image_file
        visitor.poster_image_location = POSTER_IMAGE_VISITOR_DIRECTORY
        visitor.poster_image_status = POSTER_IMAGE_STATUS
        visitor.save

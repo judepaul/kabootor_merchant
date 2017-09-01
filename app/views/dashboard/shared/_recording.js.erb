@@ -99,12 +99,20 @@ $(document).ready(function() {
 	    // $(this).attr("disabled", "disabled");
 		$(this).addClass('disabled');
 	    this.innerHTML='<i class="fa fa-refresh fa-spin"></i> Next';
-		
 		savePosterImgURI(session_id, archive_id, posterImgURI);
+        setTimeout(
+            function() {
+                // alert("Called after delay.");
+				$("#processing-span").hide();
+				$('#visitor-recording-span').hide();
+				$('re-recording-message').hide();
+				$('#visitor-video-detail-span').show();
+				
+            },
+            6000);
 	});
 	
 	$('#video-detail-next-btn').click(function (event) {
-		//alert($("#video_detail_session_id").val());
 		var session_id = $('input[name=video_detail_session_id]').val();
 		//alert(session_id);
 		var video_name=$.trim($("#video_name").val()); 
@@ -114,15 +122,28 @@ $(document).ready(function() {
 		var customer_phone=$.trim($("#customer_phone").val());
 		var validate_status = validate_video_detail_form();
 		if(validate_status){
-		 	showScheduler('visitors-video-details', session_id,video_name,customer_type,customer_name,customer_email,customer_phone);
+			$(this).addClass('disabled');
+		    this.innerHTML='<i class="fa fa-refresh fa-spin"></i> Next';
+	        setTimeout(
+	            function() {
+	                // alert("Called after delay.");
+				 	showScheduler('visitors-video-details', session_id,video_name,customer_type,customer_name,customer_email,customer_phone);
+	            },
+	            6000);			
 		}
 	});
 	
 	$('#visitor-schedule-back').click(function (event) {
-		$('#visitor-recording-span').hide();
-		$('re-recording-message').hide();
-		$('#visitor-video-detail-span').show();
-		$('#visitor-scheduler-detail-span').hide();
+		$(this).addClass('disabled');
+	    this.innerHTML='<i class="fa fa-refresh fa-spin"></i> Back';
+        setTimeout(
+            function() {
+				$('#visitor-recording-span').hide();
+				$('re-recording-message').hide();
+				$('#visitor-video-detail-span').show();
+				$('#visitor-scheduler-detail-span').hide();
+            },
+            1000);			
 	});
 	
 	
@@ -131,16 +152,13 @@ $(document).ready(function() {
 		var visitor_id = $('input[name=visitor_id]').val();
 		var schedule_date = $("#datepicker").val();
 		var schedule_time = $("#timepicker").val();
-		if(schedule_date.length>0 && schedule_time.length>0)
-		{
-			// alert("It seem's your are not yet register for Kabootor service, so we are unable to deliver your scheduled message to the customer. You are allowed to preview/download the video and view customer details.");
-			this.href="/video/index?visitor_id="+visitor_id;
-		}else{
-			alert("Please enter the date and time to schedule your video");
-		} 
-		
+		var validate_status = validate_video_schedule_form();
+		if(validate_status){
+			$(this).addClass('disabled');
+		    this.innerHTML='<i class="fa fa-refresh fa-spin"></i> Submit';
+			this.href="/video/index?visitor_id="+visitor_id;		
+		}		
 	});	
-	
 	
 });
 	
@@ -321,10 +339,7 @@ function savePosterImgURI(session_id, archive_id, posterImgURI) {
 		if (http.readyState == 4 && http.status == 200) {
 			var obj = JSON.parse(http.responseText);
 			if (obj.image_status == "File-Created") {
-				$("#processing-span").hide();
-				$('#visitor-recording-span').hide();
-				$('re-recording-message').hide();
-				$('#visitor-video-detail-span').show();
+				// alert("File-Created");
 			}else{
 				savePosterImgURI(session_id, archive_id, posterImgURI)
 			}
@@ -378,4 +393,28 @@ function isValidEmailAddress(emailAddress) {
     var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
     return pattern.test(emailAddress);
 };
+
+
+function validate_video_schedule_form(){
+	var ret_flag = false;
+	
+	var schedule_date_flag = $("#datepicker").val() != null && $("#datepicker").val() != "";
+	if(!schedule_date_flag) {
+		$("#schedule_date_invalid_div").show();
+	}else{
+		$("#schedule_date_invalid_div").hide();
+	}
+	
+	var schedule_time_flag = $("#timepicker").val() != null && $("#timepicker").val() != "";
+	if(!schedule_time_flag) {
+		$("#schedule_time_invalid_div").show();
+	}else{
+		$("#schedule_time_invalid_div").hide();
+	}
+			
+	ret_flag = schedule_date_flag && schedule_time_flag
+	
+	return ret_flag;
+}
+
 
