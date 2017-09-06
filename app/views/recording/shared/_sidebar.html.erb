@@ -1,0 +1,45 @@
+<div class="nav-side-menu">
+	<div class="brand">Dashboard</div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+    <div class="menu-list">
+        <ul id="menu-content" class="menu-content collapse out">
+            <li <%= controller.controller_name == "dashboard" ?  "class=active" : "" %>>
+                <a href="/create/video">
+                    <span class="glyphicon glyphicon-record"></span> Create Video
+                </a>
+            </li>
+            <li <%= controller.controller_name == "video" ?  "class=active" : "" %>>
+				<% if params[:visitor_id].blank? %>
+                <a href="/video/index">
+                    <span class="glyphicon glyphicon-facetime-video"></span> Videos
+                </a>
+				<% else %>
+                <a href="/video/index?visitor_id=<%= params[:visitor_id] %>">
+                    <span class="glyphicon glyphicon-facetime-video"></span> Videos
+                </a>				
+				<% end %>
+            </li>
+            <li <%= controller.controller_name == "customers" ?  "class=active" : "" %>>
+                <% if params[:visitor_id].blank? %>
+				<a href="/customers">
+                    <span class="glyphicon glyphicon-user"></span> Customers
+                </a>
+				<% else %>
+                <a href="/customers?visitor_id=<%= params[:visitor_id] %>">
+                    <span class="glyphicon glyphicon-facetime-video"></span> Customers
+                </a>
+				<% end %>
+            </li>
+            <li>
+                <a href="">
+                    <!-- <span class="glyphicons glyphicons-bell"></span> --><span class="glyphicon glyphicon-bullhorn"></span> Notifications
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-cog"></span> Settings
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

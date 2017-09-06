@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   
   get 'dashboard/index'
-  match 'create/video', to: 'dashboard#start_exploring', via: :get
+  match 'create/video', to: 'recording#start', via: :get
 
   match 'create/exploring/start',  to: "opentok#start", via: :post
   match '/stop/:archive_id',  to: "opentok#stop", via: :get

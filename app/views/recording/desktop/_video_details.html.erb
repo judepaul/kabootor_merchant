@@ -1,0 +1,92 @@
+<input type="hidden" name= "video_details_session_id">
+
+<div class="row">
+	<div class="form-group">
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<%= label_tag  :video_name, "Name/Title of the Video" , :class => "control-label required", style: "font-size: 18px !important;" %>
+		</div>
+		<div class="col-sm-12 col-md-12 col-lg-6">
+			<%= text_field_tag :video_name, params[:video_name], :class =>"form-control" %>
+		    <div class="col-sm-12 col-md-12 col-lg-12 color-text" style="display:none;" id="video_name_required_div">
+		    	 Video Name is required.
+		    </div>
+		</div>
+	</div>
+</div>
+<div class="row"><br/></div>
+<!-- <div class="row"><br/></div> -->
+<div class="row">
+	<div class="form-group">
+		<div class="col-sm-12 col-md-12 col-lg-12">
+			<span class="control-label required" style="font-size: 18px !important;"><strong>Send this Video to New or Existing Customer</strong></span>
+		</div>
+	</div>
+</div>
+<div class="row"><br/></div>
+<div class="row">
+	<div class="form-group">
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<%= radio_button_tag :customer_type, 'new', false, style: "color:#FFFFFF; font-size: 14px !important;" %> <strong> New Customer </strong>
+		</div>
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<%= radio_button_tag :customer_type, 'existing', false, disabled: true, style: "color:#FFFFFF; font-size: 14px !important;" %> <strong> Existing Customer </strong>
+		</div>
+	</div>
+</div>
+<div class="row"><br/></div>
+<!-- <div class="row"><br/></div> -->
+<form id="video_details_form">
+<div class="row" id="customer_form" style="display:none;">
+	<div class="form-group">
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<%= label_tag  :customer_name, "Customer Name" , :class => "control-label required", style: "font-size: 14px !important;" %>
+		</div>
+		<div class="col-sm-12 col-md-12 col-lg-6">
+			<%= text_field_tag :customer_name, params[:customer_name], :class =>"form-control", required: true %>
+		    <div class="col-sm-12 col-md-12 col-lg-12 color-text" style="display:none;" id="customer_name_required_div">
+		    	 Customer Name is required.
+		    </div>
+		</div>		
+	</div>
+	<div class="row"><br/></div>
+	<!-- <div class="row"><br/></div> -->
+	<div class="form-group">
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<%= label_tag  :customer_email, "Customer Email" , :class => "control-label required", style: "font-size: 14px !important;" %>
+		</div>
+		<div class="col-sm-12 col-md-12 col-lg-6">
+			<%= email_field_tag :customer_email, params[:customer_email], :class =>"form-control", required: true %>
+		    <div class="col-sm-12 col-md-12 col-lg-12 color-text" style="display:none;" id="customer_email_required_div">
+		    	 Customer Email is required.
+		    </div>
+		    <div class="col-sm-12 col-md-12 col-lg-12 color-text" style="display:none;" id="customer_email_invalid_div">
+		    	 Customer Email is Invalid.
+		    </div>			
+		</div>
+	</div>
+	<div class="row"><br/></div>
+	<!-- <div class="row"><br/></div> -->
+	<div class="form-group">
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<%= label_tag  :customer_phone, "Customer Phone" , :class => "control-label", style: "font-size: 14px !important;" %>
+		</div>
+		<div class="col-sm-12 col-md-12 col-lg-6">
+			<%= text_field_tag :customer_phone, params[:customer_phone], :class =>"form-control", :minlength=>"16",
+   :maxlength=>"16", :onkeypress=>"formatPhone(this);", required: true %>
+		</div>
+	</div>
+</div>
+</form>
+
+
+
+<script type="text/javascript">
+	function formatPhone(obj) {
+		var numbers = obj.value.replace(/\D/g, ''),
+		char = { 0: '(', 3: ') ', 6: ' - ' };
+		obj.value = '';
+		for (var i = 0; i < numbers.length; i++) {
+			obj.value += (char[i] || '') + numbers[i];
+		}
+	}
+	</script>

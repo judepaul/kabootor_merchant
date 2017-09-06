@@ -1,0 +1,434 @@
+//alert('hi');
+
+$(document).ready(function() {
+
+	var sessionId = "<%= @session_new.session_id %>";
+	var apiKey = "<%= @api_key %>";
+	var token = "<%= @token %>";
+	var archive_url = null;
+	var countdowntime = <%= @counter_time %> ;
+	var file_name = null;
+	var posterImgURI = null;
+	var functioncalltime = 0;
+	var functioncalltimestart = 0;
+
+
+	var publisherOptions = {
+		showControls: false,
+		width: 640,
+		height: 417
+	};
+
+	var session = null;
+	var publisher = null;
+	var archiveID = null;
+	var systemCompatability = 0;
+
+	systemCompatability = OT.checkSystemRequirements();
+
+	if (systemCompatability == 0) {
+		// $("#left_panel_span").hide();
+		// $("#top_left_status_span").hide();
+		// $("#left_panel_browser_incompatible_span").show();
+
+	} else {
+		session = OT.initSession(apiKey, sessionId);
+		publisher = OT.initPublisher('publisher', publisherOptions);
+		session.connect(apiKey, token, function(err, info) {
+			if (err) {
+				alert(err.message || err);
+				console.log("Error connecting: ", error.name, error.message);
+			}
+			session.publish(publisher);
+
+		});
+		
+		session.on('archiveStarted', function(event) {
+			archiveID = event.id;
+			console.log('ARCHIVE STARTED --> ID' +archiveID);
+			startCountDown(null, countdowntime);
+
+			$('#get-ready-span').hide();
+			$('#stop-span').show();
+
+			var imgData = publisher.getImgData();
+			posterImgURI = "data:image/png;base64," + imgData;
+		});
+
+		session.on('archiveStopped', function(event) {
+			// alert('archiveStopped');
+			// $('#subscribers').html("<img src='" + posterImgURI + "' width='680' height='477' />");
+			$('#subscribers').html("<img src='" + posterImgURI + "' width='640' height='417' />");
+			$('input[name=archive_id]').val(archiveID);
+			$('input[name=img_data]').val(posterImgURI);
+			showVideo(sessionId, archiveID, posterImgURI);
+			archiveID = null;
+			console.log('ARCHIVE STOPPED');
+			$('#timer-display-span').hide();
+			$('#stop-span').hide();
+			$("#processing-span").show();
+
+
+		});
+		
+	}
+	
+	// ---------------  Recording Controls ---------------  
+	
+	$('#start-recording').click(function(event) {
+		// alert('start-recording');
+		onStartShowPanels();
+		startCountDownForStart(null, 6);
+	}).show();
+	
+	$('#stop-recording').click(function(event) {
+		// alert('stop-recording');
+		onStopShowPanels();
+		if (archiveID != null) {
+			$.get('/stop/' + archiveID);
+		}
+	});
+	
+	
+	// ------------ Next Page --------------
+	
+	$('#recording-next-btn').click(function (event) {
+		var session_id = $('input[name=session_id]').val();
+		var archive_id = $('input[name=archive_id]').val();
+		var posterImgURI = $('input[name=img_data]').val();
+	    // $(this).attr("disabled", "disabled");
+		$(this).addClass('disabled');
+	    this.innerHTML='<i class="fa fa-refresh fa-spin"></i> Next';
+		savePosterImgURI(session_id, archive_id, posterImgURI);
+        setTimeout(
+            function() {
+                // alert("Called after delay.");
+				$("#processing-span").hide();
+				$('#visitor-recording-span').hide();
+				$('re-recording-message').hide();
+				$('#visitor-video-detail-span').show();
+				
+				$("#record").removeClass("active");
+				$("#detail").addClass("active");
+				$("schedule").removeClass("active");
+				
+            },
+            6000);
+	});
+	
+	$('#video-detail-next-btn').click(function (event) {
+		var session_id = $('input[name=video_detail_session_id]').val();
+		//alert(session_id);
+		var video_name=$.trim($("#video_name").val()); 
+		var customer_type=$.trim($("#customer_type").val()); 
+		var customer_name=$.trim($("#customer_name").val()); 
+		var customer_email=$.trim($("#customer_email").val()); 
+		var customer_phone=$.trim($("#customer_phone").val());
+		var validate_status = validate_video_detail_form();
+		if(validate_status){
+			$(this).addClass('disabled');
+		    this.innerHTML='<i class="fa fa-refresh fa-spin"></i> Next';
+	        setTimeout(
+	            function() {
+	                // alert("Called after delay.");
+				 	showScheduler('visitors-video-details', session_id,video_name,customer_type,customer_name,customer_email,customer_phone);
+	            },
+	            6000);			
+		}
+	});
+	
+	$('#visitor-schedule-back').click(function (event) {
+		$(this).addClass('disabled');
+	    this.innerHTML='<i class="fa fa-refresh fa-spin"></i> Back';
+        setTimeout(
+            function() {
+				$('#visitor-recording-span').hide();
+				$('re-recording-message').hide();
+				$('#visitor-video-detail-span').show();
+				$('#visitor-scheduler-detail-span').hide();
+				
+				$("#record").removeClass("active");
+				$("#detail").addClass("active");
+				$("schedule").removeClass("active");
+				
+            },
+            1000);			
+	});
+	
+	
+	$('#video-schedule-submit-btn').click(function (event) {
+		var session_id = $('input[name=video_schedule_session_id]').val();
+		var visitor_id = $('input[name=visitor_id]').val();
+		var schedule_date = $("#datepicker").val();
+		var schedule_time = $("#timepicker").val();
+		var validate_status = validate_video_schedule_form();
+		if(validate_status){
+			$(this).addClass('disabled');
+		    this.innerHTML='<i class="fa fa-refresh fa-spin"></i> Submit';
+			this.href="/video/index?visitor_id="+visitor_id;		
+		}		
+	});	
+	
+});
+	
+	
+
+// ---------------  Display Panel control --------------- 
+
+function defaultShowPanels() {
+
+}
+
+function onStartShowPanels() {
+	$('#start-span').hide();
+	$('#get-ready-span').show();
+}
+
+function onStopShowPanels() {
+	$('#timer-display-span').hide();
+	$('#stop-span').hide();
+}
+
+
+// ---------------  counter ---------------  
+
+var functioncalltime = 0;
+var functioncalltimestart = 0;
+
+function setCountDownTime(time) {
+	console.log(time);
+	// $('#countdowntime').html(time+1);
+	$('#timer-display-span').html('<span>'+(time+1)+'</span>');
+	if (time == 0) {
+		return -1;
+	} else {
+		return 1;
+	}
+}
+
+function setCountDownTimeForStart(time) {
+	console.log(time);
+	if (time % 2 == 0) {
+		$('#timer-display-span').append('<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw margin-bottom" style="color:#ffffff;font-size:12px;"></i>');
+	}
+	if (time == 0) {
+		return -1;
+	} else {
+		return 1;
+	}
+}
+
+	
+function startCountDown(interval, cntDwnTime) {
+	if (interval == null) {
+		// functioncalltime = countdowntime;
+		functioncalltime = cntDwnTime;
+		setCountDownTime(--functioncalltime);
+		var intervalcount = setInterval(function() {
+			startCountDown(intervalcount);
+		}, 1000);
+	} else {
+		var val = setCountDownTime(--functioncalltime);
+		if (val == -1) {
+			clearInterval(interval);
+			$('#stop-recording').click();
+		}
+	}
+}
+
+function startCountDownForStart(interval, cntDwnTime) {
+	if (interval == null) {
+		functioncalltimestart = cntDwnTime;
+		setCountDownTimeForStart(--functioncalltimestart);
+		var intervalcount = setInterval(function() {
+			startCountDownForStart(intervalcount);
+		}, 1000);
+	} else {
+		var val = setCountDownTimeForStart(--functioncalltimestart);
+		if (val == -1) {
+			clearInterval(interval);
+			var options = $('.archive-options').serialize();
+			$.post('exploring/start', options);
+
+		}
+	}
+}
+
+
+// ---------------  Processing Script to show video ---------------  
+function showVideo(session_id, archival_id, posterImgURI) {
+	var http = new XMLHttpRequest();
+	var data = new FormData();
+	data.append('session_id', session_id);
+	
+	// http.open("GET", '/check_upload_url_status/' + archival_id, true);
+	// Updated on 28/08/2017 to save the post image based on the sessionId
+	http.open("POST", '/check_upload_url_status/', true);
+	http.onreadystatechange = function() { //Call a function when the state changes.
+		if (http.readyState == 4 && http.status == 200) {
+			var obj = JSON.parse(http.responseText);
+			if (obj.video_status == "available") {
+				console.log(obj.video_url);	
+				// alert("returned check_upload_url_status");
+				$('input[name=video_detail_session_id]').val(obj.media_session);
+				$('#subscribers').html("<video id='video1' width='640' height='417' controls poster=" + posterImgURI + "><source src=" + obj.video_url + " type='video/mp4'>Your browser does not support HTML5 video.</video>");
+				$(".record-process").hide();
+				$("#start-recording-message").hide();
+				$("#submit-recording-message").show();
+				$("#processing-span").hide();
+				$("#re-recording-message").show();
+				$("#re-record-span").show();
+				//session.unpublish(publisher);
+			} else {
+				console.log(obj.video_status);
+				showVideo(session_id, archival_id, posterImgURI);
+			}
+		}
+
+	}
+	http.send(data);
+	// http.open("POST", '/create/video/poster_image', true);
+	// http.onreadystatechange = function() {//Call a function when the state changes.
+	//     if(http.readyState == 4 && http.status == 200) {
+	//         // alert(http.responseText);
+	// 		// window.location.href = "/video/index?media_id="+archival_id;
+	//     }
+	// }
+	// http.send(data);
+}
+
+
+
+function showScheduler(pageType, session_id,video_name, customer_type, customer_name, customer_email, customer_phone) {
+	var http = new XMLHttpRequest();
+	var data = new FormData();
+	data.append('session_id', session_id);
+	data.append('video_name', video_name);
+	data.append('customer_type', customer_type);
+	data.append('customer_name', customer_name);
+	data.append('customer_email', customer_email);
+	data.append('customer_phone', customer_phone);
+	data.append('page_type', 'visitor');
+	http.open("POST", '/create/video/visitor/', true);
+	http.onreadystatechange = function() { //Call a function when the state changes.
+		if (http.readyState == 4 && http.status == 200) {
+			var obj = JSON.parse(http.responseText);
+			if (obj.video_details_status == "saved") {
+				//$('#subscribers').html("<video id='video1' width='640' height='417' controls poster=" + posterImgURI + "><source src=" + obj.video_url + " type='video/mp4'>Your browser does not support HTML5 video.</video>");
+				// alert(obj.visitor_id);
+				$('input[name=visitor_id]').val(obj.visitor_id);
+				$('input[name=video_schedule_session_id]').val(obj.session_id);
+				$('input[name=video_name]').val(obj.video_name);
+				$('input[name=customer_type]').val("new");
+				$('input[name=customer_name]').val(obj.customer_name);
+				$('input[name=customer_email]').val(obj.customer_email);
+				$('input[name=customer_phone]').val(obj.customer_phone);
+				$("#visitor-recording-span").hide();
+				$("#visitor-video-detail-span").hide();
+				$("#visitor-scheduler-detail-span").show();
+				
+				$("#record").removeClass("active");
+				$("#detail").removeClass("active");
+				$("#schedule").addClass("active");
+				
+			} else {
+				showScheduler(pageType);
+			}
+		}
+
+	}
+	http.send(data);
+
+}
+
+
+function savePosterImgURI(session_id, archive_id, posterImgURI) {
+	var http = new XMLHttpRequest();
+	var data = new FormData();
+	data.append('session_id', session_id);
+	data.append('archive_id', archive_id);
+	data.append('img_data', posterImgURI);
+	http.open("POST", '/create/video/poster_image', true);
+	http.onreadystatechange = function() { //Call a function when the state changes.
+		if (http.readyState == 4 && http.status == 200) {
+			var obj = JSON.parse(http.responseText);
+			if (obj.image_status == "File-Created") {
+				// alert("File-Created");
+			}else{
+				savePosterImgURI(session_id, archive_id, posterImgURI)
+			}
+		}
+	}
+	http.send(data);
+}
+
+
+
+
+function validate_video_detail_form(){
+	var ret_flag = false;
+	var valid_email_flag = false;
+	var valid_customer_email_flag = false;
+	
+	var video_name_flag = $("#video_name").val() != null && $("#video_name").val() != "";
+	if(!video_name_flag) {
+		$("#video_name_required_div").show();
+	}else{
+		$("#video_name_required_div").hide();
+	}
+	
+	var customer_name_flag = $("#customer_name").val() != null && $("#customer_name").val() != "";
+	if(!customer_name_flag) {
+		$("#customer_name_required_div").show();
+	}else{
+		$("#customer_name_required_div").hide();
+	}
+	
+	var customer_email_flag = $("#customer_email").val() != null && $("#customer_email").val() != "";
+	if(!customer_email_flag) {
+		$("#customer_email_required_div").show();
+	}else{
+		$("#customer_email_required_div").hide();
+		valid_customer_email_flag = isValidEmailAddress($("#customer_email").val());
+		if(!valid_customer_email_flag){
+			$("#customer_email_invalid_div").show();
+		}else{
+			$("#customer_email_invalid_div").hide();
+		}
+	}
+		
+	ret_flag = video_name_flag && customer_name_flag && customer_email_flag;
+	
+	return ret_flag;
+}
+
+
+function isValidEmailAddress(emailAddress) {
+    var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+    return pattern.test(emailAddress);
+};
+
+
+function validate_video_schedule_form(){
+	var ret_flag = false;
+	
+	var schedule_date_flag = $("#datepicker").val() != null && $("#datepicker").val() != "";
+	if(!schedule_date_flag) {
+		$("#schedule_date_invalid_div").show();
+	}else{
+		$("#schedule_date_invalid_div").hide();
+	}
+	
+	var schedule_time_flag = $("#timepicker").val() != null && $("#timepicker").val() != "";
+	if(!schedule_time_flag) {
+		$("#schedule_time_invalid_div").show();
+	}else{
+		$("#schedule_time_invalid_div").hide();
+	}
+			
+	ret_flag = schedule_date_flag && schedule_time_flag
+	
+	return ret_flag;
+}
+
+

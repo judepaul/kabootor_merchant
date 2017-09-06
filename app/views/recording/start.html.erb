@@ -1,0 +1,119 @@
+<div class="container fullHeight" style="width:100%;">
+	<div class="row jumbotron">
+		<div class="col-sm-12 col-md-12 col-lg-12 left jumbotron">
+			<div class="row">
+				<ul class="breadcrumb">
+					<li id="record" class="active"><strong><a href="javascript:void(0);">Record</a></strong></li>
+					<li id="detail" class=""><strong><a href="javascript:void(0);">Details</a></strong></li>
+					<li id="schedule"><strong><a href="javascript:void(0);">Schedule</a></strong></li>
+				</ul>
+			</div>
+			
+			<span id="visitor-recording-span" style="display:inline;">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-2 text-right" style="padding-top:20%;">
+						<span id="re-recording-message" style="display:none;">
+							<p class=""><!-- Do you want to re-record the message? --><a href="/create/video" id="re-record" class="btn btn-danger" style="cursor: pointer; cursor: hand; color:#FFF; font-weight:bold;">Re-Record</a></p>
+						</span>
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-8 text-center">
+						<%= render partial: 'recording/desktop/recording' %>
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-2 text-right" style="padding-top:20%;">
+						<span id="re-record-span" style="display:none;">
+							<p class=""><a href="#" id="recording-next-btn" class="btn btn-danger" style="cursor: pointer; cursor: hand;  color:#FFF; font-weight:bold;"><strong>Next</strong></a></p>
+						</span>
+					</div>
+				
+				</div>
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-2 text-center">
+					
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-8">
+						<!-- <span><%#= render partial: 'recording/desktop/recording' %></span> -->
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-2 text-center">
+					
+					</div>
+				</div>
+			</span>	
+			
+			
+			<span id="visitor-video-detail-span" style="display:none;">
+				<form class="form-horizontal" id="save-video-details-form">
+				<input type="hidden" name= "video_detail_session_id">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-2 text-right" style="padding-top:20%;">
+						
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-8 text-center">
+						<%= render partial: 'dashboard/desktop/video_details' %>
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-2 text-right" style="padding-top:20%;">
+						
+					</div>
+				
+				</div>
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-2 text-center">
+					<span id="re-recording-message" style="display:inline;">
+					<p class=""><!-- Do you want to re-record the message? --><a href="/create/video" id="re-record" class="btn btn-danger" style="cursor: pointer; cursor: hand; color:#FFF; font-weight:bold;" onclick="return confirm('Clicking Back button will start a new video recording. Are you sure?')">Back</a></p>
+					</span>
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-8">
+						<!-- <span><%#= render partial: 'recording/desktop/recording' %></span> -->
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-2 text-center">
+					<span id="re-record-span" style="display:inline;">
+					<p class=""><a href="#" id="video-detail-next-btn" class="btn btn-danger" style="cursor: pointer; cursor: hand;  color:#FFF; font-weight:bold;"><strong>Next</strong></a></p>
+						<!-- <button type="submit" class="btn btn-danger" style="cursor: pointer; cursor: hand;  color:#FFF; font-weight:bold;"><strong>Submit</strong></button> -->
+					<!-- <p>If you are happy with your recording, click Next.</p> -->
+					</span>
+					</div>
+				</div>
+			</span>
+					
+					
+			<span id="visitor-scheduler-detail-span" style="display:none;">
+			<input type="hidden" name= "video_schedule_session_id">
+			<input type="hidden" name= "visitor_id">
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-2 text-right" style="padding-top:20%;">
+					
+				</div>
+				<div class="col-sm-12 col-md-12 col-lg-8 text-center">
+					<%= render partial: 'dashboard/desktop/video_schedule' %>
+				</div>
+				<div class="col-sm-12 col-md-12 col-lg-2 text-right" style="padding-top:20%;">
+					
+				</div>
+			
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-2 text-center">
+				<span id="re-recording-message" style="display:inline;">
+				<p class=""><!-- Do you want to re-record the message? --><a href="#" id="visitor-schedule-back" class="btn btn-danger" style="cursor: pointer; cursor: hand; color:#FFF; font-weight:bold;">Back</a></p>
+				</span>
+				</div>
+				<div class="col-sm-12 col-md-12 col-lg-8">
+					<!-- <span><%#= render partial: 'recording/desktop/recording' %></span> -->
+				</div>
+				<div class="col-sm-12 col-md-12 col-lg-2 text-center">
+				<span id="re-record-span" style="display:inline;">
+				<p class=""><a href="#" id="video-schedule-submit-btn" class="btn btn-danger" style="cursor: pointer; cursor: hand;  color:#FFF; font-weight:bold;"><strong>Submit</strong></a></p>
+					<!-- <button type="submit" class="btn btn-danger" style="cursor: pointer; cursor: hand;  color:#FFF; font-weight:bold;"><strong>Submit</strong></button> -->
+				<!-- <p>If you are happy with your recording, click Next.</p> -->
+				</span>
+				</div>
+			</div>
+			
+			</span>
+		</div>
+	</div>
+	
+</div>
+
+
+
