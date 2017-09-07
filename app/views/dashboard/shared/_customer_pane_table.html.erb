@@ -1,0 +1,19 @@
+<table class="table table-hover" id="dev-table">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Phone</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% unless @visitor.blank? %>
+		<td>1</td>
+		<td><%= @visitor.receiver_name %></td>
+		<td><%= @visitor.receiver_email %></td>
+		<td><%= @visitor.receiver_phone %></td>
+		<% end %>
+	</tbody>
+
+</table>

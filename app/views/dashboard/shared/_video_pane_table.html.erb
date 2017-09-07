@@ -1,0 +1,19 @@
+<table class="table table-hover" id="dev-table">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Media</th>
+			<th>Customer</th>
+			<th>Details</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% unless @visitor.blank? %>
+		<td>1</td>
+		<td><%= @visitor.video_title %></td>
+		<td><%= @visitor.receiver_name %></td>
+		<td>-</td>
+		<% end %>
+	</tbody>
+
+</table>
