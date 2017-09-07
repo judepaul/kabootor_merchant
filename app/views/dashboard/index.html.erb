@@ -2,6 +2,7 @@
   <div class="row jumbotron">
 	  <div class="row"><br/></div>
 	  <% if @visitor.blank? %>
+	  	<div class="row"><br/></div>
 	  	<%= render partial: "dashboard/shared/pre_video_creation" %>
 	  <% else %>
 		<%= render partial: "dashboard/shared/post_video_creation", :locals => {:@visitor=>@visitor} %>
