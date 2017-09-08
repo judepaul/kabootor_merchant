@@ -25,13 +25,12 @@
 			</span>		
 		</div>
 		</div>
-		<div class="col-sm-12 col-md-12 col-lg-2">
-			<div class="input-group clockpicker" data-placement="right" data-align="top" data-autoclose="true">
-			    <input type="text" class="form-control" id="timepicker" value="">
-			    <span class="input-group-addon">
-			        <span class="glyphicon glyphicon-time"></span>
-			    </span>
-			    
+		<div class="col-sm-12 col-md-12 col-lg-3">
+			<div class='input-group date' id='datetimepicker3'>
+				<input type='text' class="form-control" />
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-time"></span>
+				</span>
 			</div>
 		</div>
 	</div>
@@ -56,6 +55,8 @@
                 	format: 'MM/DD/YYYY'
                 });
 				
-				$('.clockpicker').clockpicker();
+				$('#datetimepicker3').datetimepicker({
+					format: 'LT'
+				});
             });
         </script>
