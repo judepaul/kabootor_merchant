@@ -14,12 +14,21 @@
 				</a>
                 
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
+            <div id="navbar" class="navbar-collapse collapse navbar-right" style="padding: 18px 36px 0 0;">
                 <!-- <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
-                </ul>
+                </ul> -->
                 <div class="navbar-right">
-                </div> -->
+					<ul class="nav navbar-nav">
+						<% if user_signed_in? %>
+						 <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+						<% else %>
+						 <!-- <li><%#= link_to "Sign Up", new_user_registration_path %></li> -->
+						 <!-- <li><span class="glyphicon glyphicon-user" style="color:#FFF;"></span><%#= link_to "Login", new_user_session_path %></li> -->
+						<% end %>
+					</ul>
+                </div>
             </div>
+
         </nav>
     </div>

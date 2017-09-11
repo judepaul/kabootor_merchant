@@ -61,6 +61,9 @@ $(document).ready(function() {
 			$('#subscribers').html("<img src='" + posterImgURI + "' width='640' height='417' />");
 			$('input[name=archive_id]').val(archiveID);
 			$('input[name=img_data]').val(posterImgURI);
+			console.log('calling savePosterImgURI');
+			savePosterImgURI(sessionId, archiveID, posterImgURI);
+			console.log('calling showVideo');
 			showVideo(sessionId, archiveID, posterImgURI);
 			archiveID = null;
 			console.log('ARCHIVE STOPPED');
@@ -99,7 +102,7 @@ $(document).ready(function() {
 	    // $(this).attr("disabled", "disabled");
 		$(this).addClass('disabled');
 	    this.innerHTML='<i class="fa fa-refresh fa-spin"></i> Next';
-		savePosterImgURI(session_id, archive_id, posterImgURI);
+		// savePosterImgURI(session_id, archive_id, posterImgURI);
         setTimeout(
             function() {
                 // alert("Called after delay.");
@@ -353,7 +356,7 @@ function savePosterImgURI(session_id, archive_id, posterImgURI) {
 		if (http.readyState == 4 && http.status == 200) {
 			var obj = JSON.parse(http.responseText);
 			if (obj.image_status == "File-Created") {
-				// alert("File-Created");
+				alert("File-Created");
 			}else{
 				savePosterImgURI(session_id, archive_id, posterImgURI)
 			}

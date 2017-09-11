@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   
   match 'create/video/visitor/', to: "video#visitor_video_details", via: :post
   
+  devise_for :users, controllers: { registrations: "registrations" }, path_names: { sign_in: 'login', password: 'forgot', confirmation: 'confirm', unlock: 'unblock', sign_up: 'register', sign_out: 'signout'}
+  
+  
   resources :contacts
   resources :customers
   

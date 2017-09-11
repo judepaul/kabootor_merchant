@@ -14,15 +14,19 @@
 				</div>
 			</div>
 		</div>
+		<% if current_user.blank? %>
 		<div class="col-sm-6 col-md-6 col-lg-6">
 			<div class="panel" style="border-color:#F35C5F;">
 				<div class="panel-heading" style="background:#F35C5F;color:#FFF;">
 					<h3 class="panel-title"><i class="glyphicon glyphicon-user"></i> Sign Up</h3>
 					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
 				</div>
-				<div class="panel-body center header-36" style="vertical-align:middle; padding:60px;background:#eeeeee;"><strong>SIGN UP</strong></div>
+				<div class="panel-body center header-36" style="vertical-align:middle; padding:60px;background:#eeeeee;"><strong><%= link_to "Sign Up", new_user_registration_path(visitor_id: @visitor.id), style: "text-decoration: none;" %></strong></div>
 		</div>
 	</div>
+	<% else %>
+		
+	<% end %>
 	</div>
 	<div class="row">
 		<div class="col-sm-6 col-md-6 col-lg-6">

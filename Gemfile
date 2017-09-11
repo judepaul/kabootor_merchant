@@ -75,3 +75,5 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 gem 'clockpicker-rails'
 
 gem 'jquery-validation-rails'
+
+gem 'devise', '~> 4.3'
