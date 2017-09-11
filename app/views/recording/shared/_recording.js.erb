@@ -356,7 +356,7 @@ function savePosterImgURI(session_id, archive_id, posterImgURI) {
 		if (http.readyState == 4 && http.status == 200) {
 			var obj = JSON.parse(http.responseText);
 			if (obj.image_status == "File-Created") {
-				alert("File-Created");
+				//alert("File-Created");
 			}else{
 				savePosterImgURI(session_id, archive_id, posterImgURI)
 			}
