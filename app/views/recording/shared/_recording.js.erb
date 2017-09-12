@@ -112,6 +112,7 @@ $(document).ready(function() {
 				$('#visitor-video-detail-span').show();
 				
 				$("#record").removeClass("active");
+				$("#record").addClass("completed");
 				$("#detail").addClass("active");
 				$("schedule").removeClass("active");
 				
@@ -331,7 +332,9 @@ function showScheduler(pageType, session_id,video_name, customer_type, customer_
 				$("#visitor-scheduler-detail-span").show();
 				
 				$("#record").removeClass("active");
+				$("#record").addClass("completed");
 				$("#detail").removeClass("active");
+				$("#detail").addClass("completed");
 				$("#schedule").addClass("active");
 				
 			} else {
