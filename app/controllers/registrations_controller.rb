@@ -1,12 +1,15 @@
 class RegistrationsController < Devise::RegistrationsController
   
   def create
-    p "%%%%%%%%%%%%%"
     super
-    p "@@@@@@@@@@@@"
     if resource.save
-      p "!!!!!!!!!"
-      resource.update_attributes(visitor_id: params[:user][:visitor_id]) unless params[:user][:visitor_id].blank?
+      visitor_id = params[:user][:visitor_id]
+      # Visitor continue with signup after start exploring
+      unless visitor_id.blank?
+        resource.update_attribute("visitor_id", visitor_id)
+        tenant = Tenant.create
+        resource.populate_tenant tenant.id unless tenant.blank?
+      end
     end
   end
   

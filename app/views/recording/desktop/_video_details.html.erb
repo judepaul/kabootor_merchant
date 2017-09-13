@@ -26,7 +26,7 @@
 <div class="row">
 	<div class="form-group">
 		<div class="col-sm-12 col-md-12 col-lg-4">
-			<%= radio_button_tag :customer_type, 'new', false, style: "color:#FFFFFF; font-size: 14px !important;" %> <strong> New Customer </strong>
+			<%= radio_button_tag :customer_type, 'new', true, style: "color:#FFFFFF; font-size: 14px !important;" %> <strong> New Customer </strong>
 		</div>
 		<div class="col-sm-12 col-md-12 col-lg-4">
 			<%= radio_button_tag :customer_type, 'existing', false, disabled: true, style: "color:#FFFFFF; font-size: 14px !important;" %> <strong> Existing Customer </strong>
@@ -36,7 +36,7 @@
 <div class="row"><br/></div>
 <!-- <div class="row"><br/></div> -->
 <form id="video_details_form">
-<div class="row" id="customer_form" style="display:none;">
+<div class="row" id="customer_form" style="display:inline;">
 	<div class="form-group">
 		<div class="col-sm-12 col-md-12 col-lg-4">
 			<%= label_tag  :customer_name, "Customer Name" , :class => "control-label required", style: "font-size: 14px !important;" %>
