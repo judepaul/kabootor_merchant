@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  # belongs_to :visitor
+  belongs_to :visitor
   # belongs_to :tenant
   has_one :user_session
   
