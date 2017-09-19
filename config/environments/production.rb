@@ -96,4 +96,8 @@ Rails.application.configure do
   config.action_mailer.postmark_settings = { :api_key => "4b2b4bc0-e12f-408d-be41-78eaaff877b0" }
   config.postmark_signature                 = "support@kabootor.com"
   
+  config.action_mailer.asset_host = 'https://kabootor-merchant.herokuapp.com'
+  config.action_mailer.default_url_options = { host: 'https://kabootor-merchant.herokuapp.com' }
+  
+  
 end

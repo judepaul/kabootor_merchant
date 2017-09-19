@@ -26,7 +26,7 @@
 				<td><a data-toggle='modal' data-target='#video-modal' style='cursor: pointer; cursor: hand; text-decoration:none;'><%= @visitor.video_title %>(Video/MP4)</a></td>
 				<td>
 					<!-- <a data-toggle='modal' data-target='#customer-modal' style='cursor: pointer; cursor: hand;'>Add New Customer</a> -->
-					<a href="/customers?visitor_id=<%= @visitor.id %>" style="cursor: pointer; cursor: hand;">@visitor.receiver_name</a>
+					<a href="/customers?visitor_id=<%= @visitor.id %>" style="cursor: pointer; cursor: hand;"><%= @visitor.receiver_name %></a>
 				</td>
 				<td><span class="glyphicon glyphicon-calendar"></span></td>
 				<% end %>
