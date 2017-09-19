@@ -1,0 +1,54 @@
+<div class="col-sm-12 col-md-12 col-lg-12" style="padding-left:0 !important; padding-right:0 !important;">
+	<div class="row">
+		<div class="col-sm-6 col-md-6 col-lg-6">
+			<div class="panel" style="border-color:#F35C5F;">
+				<div class="panel-heading" style="background:#F35C5F;color:#FFF;">
+					<h3 class="panel-title"><a href="/video/index?user_id=<%= current_user.id %>" style='cursor: pointer; cursor: hand; text-decoration:none;'><i class="glyphicon glyphicon-facetime-video"></i> Videos</a></h3>
+					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+				</div>
+				<div class="panel-body">
+					<%#= render partial: "dashboard/shared/video_pane_table", :locals => {:@visitor=>current_user} %>
+					<p style="text-align:right !important;font-size:14px;font-weight:bold;"><a href="/video/index?user_id=<%= current_user.id %>" style='cursor: pointer; cursor: hand; text-decoration:underline;'>More...</a></p>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 col-md-6 col-lg-6">
+			<div class="panel" style="border-color:#F35C5F;">
+				<div class="panel-heading" style="background:#F35C5F;color:#FFF;">
+					<h3 class="panel-title"><i class="glyphicon glyphicon-user"></i> <a href="/customers?user_id=<%= current_user.id %>" style='cursor: pointer; cursor: hand; text-decoration:none;'> Customers</a></h3>
+					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+				</div>
+				<div class="panel-body">
+					<%#= render partial: "dashboard/shared/customer_pane_table", :locals => {:@visitor=>current_user} %>
+					<p style="text-align:right !important;font-size:14px;font-weight:bold;"><a href="/customers?user_id=<%= current_user.id %>" style='cursor: pointer; cursor: hand; text-decoration:underline;'>More...</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.clickable{
+	    cursor: pointer;   
+	}
+
+	.panel-heading span {
+		margin-top: -20px;
+		font-size: 15px;
+	}
+</style>
+
+<script>
+	$(document).on('click', '.panel-heading span.clickable', function(e){
+	    var $this = $(this);
+		if(!$this.hasClass('panel-collapsed')) {
+			$this.parents('.panel').find('.panel-body').slideUp();
+			$this.addClass('panel-collapsed');
+			$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+		} else {
+			$this.parents('.panel').find('.panel-body').slideDown();
+			$this.removeClass('panel-collapsed');
+			$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+		}
+	});
+</script>

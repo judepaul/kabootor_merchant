@@ -7,9 +7,9 @@
 					<h3 class="panel-title">Watch Preview</h3>
 					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
 				</div>
-				<div class="panel-body" style="background:#eeeeee;">
+				<div class="panel-body" style="background:#eeeeee; text-align:center;">
 			   		<% unless @visitor.blank? %>
-			   			<video id='video1' width='100%' height='100%' controls poster="/photos/<%= !@visitor.poster_image_filename.blank? ? @visitor.poster_image_filename : "default-placeholder.png" %>"><source src="<%= !@visitor.blank? ? @visitor.resource_uri : "" %>" type='video/mp4'>Your browser does not support HTML5 video.</video>
+			   			<video id='video1' width='60%' height='100%' controls poster="/photos/<%= !@visitor.poster_image_filename.blank? ? @visitor.poster_image_filename : "default-placeholder.png" %>"><source src="<%= !@visitor.blank? ? @visitor.resource_uri : "" %>" type='video/mp4'>Your browser does not support HTML5 video.</video>
 			   		<% end %>
 				</div>
 			</div>
@@ -21,7 +21,7 @@
 					<h3 class="panel-title"><i class="glyphicon glyphicon-user"></i> Sign Up</h3>
 					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
 				</div>
-				<div class="panel-body center header-36" style="vertical-align:middle; padding:60px;background:#eeeeee;"><strong><%= link_to "Sign Up", new_user_registration_path(visitor_id: @visitor.id), style: "text-decoration: none;" %></strong></div>
+				<div class="panel-body center header-36" style="vertical-align:middle; padding:110px;background:#eeeeee;"><strong><%= link_to "Sign Up", new_user_registration_path(visitor_id: @visitor.id), style: "text-decoration: none;" %></strong></div>
 		</div>
 	</div>
 	<% else %>

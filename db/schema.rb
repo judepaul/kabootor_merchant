@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170913080752) do
+ActiveRecord::Schema.define(version: 20170919092920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,12 +129,15 @@ ActiveRecord::Schema.define(version: 20170913080752) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "visitor_id"
+    t.integer "visitor_id"
     t.string "tenant_id"
-    t.string "role"
+    t.text "role"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["visitor_id"], name: "index_users_on_visitor_id"
   end
 
   create_table "visitors", force: :cascade do |t|
@@ -190,6 +193,5 @@ ActiveRecord::Schema.define(version: 20170913080752) do
   add_foreign_key "storage_providers", "tenants"
   add_foreign_key "transaction_details", "tenants"
   add_foreign_key "user_sessions", "users"
-  add_foreign_key "users", "visitors"
   add_foreign_key "webrtc_server_infos", "tenants"
 end

@@ -1,6 +1,5 @@
 <div class="container-fluid fullHeight">
   <div class="row jumbotron">
-	  <div class="row"><br/></div>
 	  <% if current_user.blank? %>
 	  <% if @visitor.blank? %>
 	  	<div class="row"><br/></div>
@@ -9,7 +8,7 @@
 		<%= render partial: "dashboard/shared/post_video_creation", :locals => {:@visitor=>@visitor} %>
 	  <% end %>
 	  <% else %>
-	  	<%= render partial: "dashboard/shared/post_video_creation", :locals => {:@visitor=>current_user.visitor} %>
+	  	<%= render partial: "dashboard/shared/user_dashboard", :locals => {:@visitor=>current_user} %>
 	  <% end %>
   </div>
 </div>

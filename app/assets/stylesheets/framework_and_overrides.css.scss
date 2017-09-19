@@ -15,10 +15,6 @@ html, body {
 
 }
 
-.fullHeight{
-  height: 100%;
-}
-
 .left{
   text-align: left;
 }
@@ -38,34 +34,34 @@ html, body {
 
 .navbar{
 	background:#F35C5F;
-	margin-bottom: 0;
-	border-radius: 0;
-	min-height: 70px;
 }
 
-.navbar-nav{
-	width:65%;
-	margin: 15.5px 45px !important;
-  li {
-  	margin-left: 8%;
-	margin-top: 3%;
-	  	a {
-	  		float: right;
-	  		font-family: "Arial Rounded MT Light" !important;
-			font-size:20px !important;
-	    	color: #ffffff !important;
-    	}
-    	a:hover,a:focus{color: #24363a;}
-
-    }
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 100%;
+  padding: 15px;
+  width: auto;
 }
 
-.navbar-nav > li > a {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  
-.nav > li > a:hover, .nav > li > a:hover{background: none;}
+.navbar-brand {
+  height: 80px;
+}
+
+.nav >li >a {
+  color: #ffffff !important;
+  padding-top: 30px;
+  //padding-bottom: 30px;
+}
+.navbar-toggle {
+  padding: 10px;
+  margin: 25px 15px 25px 0;
+}
+
+.nav > li {font-size:20px !important;};
+
+.nav > li > a:hover, .nav > li > a:hover{background: none;};
 
 // Landing page Navbar CSS ends here
 
@@ -248,3 +244,35 @@ font-family: Arial Rounded MT Light;
 //------------  Landing page CSS ends here  -----------------
 
 
+
+// ------------- Devise Flash Message CSS starts here ------------
+
+.alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-alert {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+.alert-notice {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+// ------------- Devise Flash Message CSS ends here ------------

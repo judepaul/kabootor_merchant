@@ -8,11 +8,16 @@
 		</tr>
 	</thead>
 	<tbody>
+		<% if current_user.blank? %>
 		<% unless @visitor.blank? %>
 		<td>1</td>
 		<td><%= @visitor.video_title %></td>
 		<td><%= @visitor.receiver_name %></td>
 		<td>-</td>
+		<% end %>
+		<% else %>
+			<td><%= @visitor.video_title %></td>
+			<td><%= @visitor.receiver_name %></td>
 		<% end %>
 	</tbody>
 

@@ -20,14 +20,8 @@
   </head>
 
   <body>
-	<% unless controller.controller_name == "welcome" %>
-		<%= render :partial => "/layouts/shared/dashboard_nav_bar" %>
-	<% else %>
 		<%= render :partial => "/layouts/shared/brand_with_nav_bar" %>
-	<% end %>
-		<div id="f1">
-			<%= render :partial => "/layouts/shared/flash_message" %>
-		</div>
+		<%= render :partial => "/layouts/shared/flash_message" %>
 		<%= yield %>
     <div class="row"><br/></div>
 	<%= render :partial => "/layouts/shared/footer" %>
