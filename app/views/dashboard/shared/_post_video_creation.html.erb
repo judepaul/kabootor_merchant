@@ -1,13 +1,12 @@
-<div class="col-sm-12 col-md-12 col-lg-12 jumbotron" style="padding-left:0 !important; padding-right:0 !important;">
-	<div class="row"><br/></div>
+<div class="col-sm-12 col-md-12 col-lg-12" style="padding-left:0 !important; padding-right:0 !important;">
     <div class="row">
 		<div class="col-sm-6 col-md-6 col-lg-6">
-			<div class="panel" style="border-color:#F35C5F;">
-				<div class="panel-heading" style="background:#F35C5F;color:#FFF;">
+			<div class="panel" style="border-color:#cf0404;">
+				<div class="panel-heading" style="background:#cf0404;color:#FFF;">
 					<h3 class="panel-title">Watch Preview</h3>
 					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
 				</div>
-				<div class="panel-body" style="background:#eeeeee; text-align:center;">
+				<div class="panel-body" style="text-align:center;">
 			   		<% unless @visitor.blank? %>
 			   			<video id='video1' width='60%' height='100%' controls poster="/photos/<%= !@visitor.poster_image_filename.blank? ? @visitor.poster_image_filename : "default-placeholder.png" %>"><source src="<%= !@visitor.blank? ? @visitor.resource_uri : "" %>" type='video/mp4'>Your browser does not support HTML5 video.</video>
 			   		<% end %>
@@ -16,12 +15,18 @@
 		</div>
 		<% if current_user.blank? %>
 		<div class="col-sm-6 col-md-6 col-lg-6">
-			<div class="panel" style="border-color:#F35C5F;">
-				<div class="panel-heading" style="background:#F35C5F;color:#FFF;">
+			<div class="panel" style="border-color:#cf0404;">
+				<div class="panel-heading" style="background:#cf0404;color:#FFF;">
 					<h3 class="panel-title"><i class="glyphicon glyphicon-user"></i> Sign Up</h3>
 					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
 				</div>
-				<div class="panel-body center header-36" style="vertical-align:middle; padding:110px;background:#eeeeee;"><strong><%= link_to "Sign Up", new_user_registration_path(visitor_id: @visitor.id), style: "text-decoration: none;" %></strong></div>
+				<div class="panel-body center header-36" style="vertical-align:middle; padding:55px;">
+					<p class="content-24">
+						You can preview the video now and we will send your video to the customer once you get signup
+					</p>
+					<strong><%= link_to "Sign Up", new_user_registration_path(visitor_id: @visitor.id), style: "text-decoration: none;" %></strong>
+				<br/>
+				</div>
 		</div>
 	</div>
 	<% else %>
@@ -30,8 +35,8 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-6 col-md-6 col-lg-6">
-			<div class="panel" style="border-color:#F35C5F;">
-				<div class="panel-heading" style="background:#F35C5F;color:#FFF;">
+			<div class="panel" style="border-color:#cf0404;">
+				<div class="panel-heading" style="background:#cf0404;color:#FFF;">
 					<h3 class="panel-title"><a href="/video/index?visitor_id=<%= @visitor.id %>" style='cursor: pointer; cursor: hand; text-decoration:none;'><i class="glyphicon glyphicon-facetime-video"></i> Videos (1)</a></h3>
 					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
 				</div>
@@ -42,8 +47,8 @@
 			</div>
 		</div>
 		<div class="col-sm-6 col-md-6 col-lg-6">
-			<div class="panel" style="border-color:#F35C5F;">
-				<div class="panel-heading" style="background:#F35C5F;color:#FFF;">
+			<div class="panel" style="border-color:#cf0404;">
+				<div class="panel-heading" style="background:#cf0404;color:#FFF;">
 					<h3 class="panel-title"><i class="glyphicon glyphicon-user"></i> <a href="/customers?visitor_id=<%= @visitor.id %>" style='cursor: pointer; cursor: hand; text-decoration:none;'> Customers (1)</a></h3>
 					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
 				</div>

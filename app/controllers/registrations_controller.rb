@@ -7,6 +7,7 @@ class RegistrationsController < Devise::RegistrationsController
       redirect_to new_user_session_path
     else
       super
+      # MyDeviseMailer.confirmation_instructions(resource, resource.confirmation_token, {}).deliver unless resource.invalid?
       if resource.save
         visitor_id = params[:user][:visitor_id]
         # Visitor continue with signup after start exploring

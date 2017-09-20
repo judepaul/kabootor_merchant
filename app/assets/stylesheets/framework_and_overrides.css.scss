@@ -4,15 +4,17 @@
 @import url(https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
 
 html, body {
-  height: 100%;
   /* The html and body elements cannot have any padding or margin. */
+height: 100%;
+margin: 0;
 }
 
-.body{
-    float:left;
-    width:100%;
-    height:100%;
+.wrapper {
+  min-height: 100%;
 
+  /* Equal to height of footer */
+  /* But also accounting for potential margin-bottom of last child */
+  margin-bottom: -50px;
 }
 
 .left{
@@ -28,12 +30,32 @@ html, body {
   text-align: right;
 }
 
+.header-36{
+	font-family: Arial Rounded MT Bold !important;
+	font-size:36px !important;
+}
+
+
+.content-21{
+	font-family: Arial Rounded MT Bold !important;
+	font-size:21px !important;
+}
+
+.content-24{
+	font-family: Arial Rounded MT Bold !important;
+	font-size:24px !important;
+}
 
 
 //Landing page Navbar CSS starts here
 
 .navbar{
-	background:#F35C5F;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff3019+0,cf0404+100;Red+3D */
+	background: #ff3019; /* Old browsers */
+	background: -moz-linear-gradient(top, #ff3019 0%, #cf0404 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #ff3019 0%,#cf0404 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #ff3019 0%,#cf0404 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
 }
 
 .navbar-brand {
@@ -63,38 +85,27 @@ html, body {
 
 .nav > li > a:hover, .nav > li > a:hover{background: none;};
 
-// Landing page Navbar CSS ends here
+// Landing page Navbar CSS ends here //
 
-.btn-landing-signin{
-	padding: 3% 0% 0% 0%;
-	a{
-		font-family: Arial Rounded MT Light;
-		font-size:24px;
-		background: #ffffff !important;
-    border-radius: 9px;
-    color: #F35C5F !important;
-    text-decoration: none;
-    display: inline-block;
-    span{
-     font-size:24px;
-    }
+// Footer css starts here //
+
+.footer{
+    position: relative;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+	width: 100%;
+	font-family: Arial Rounded MT Light;
+	font-size:16px;
+	padding :1% 0;
+	background-color: #3D3D3D;
+	color:#faf9f5;
+	a, a:hover{
+		color:#faf9f5;
+		text-decoration:none;
 	}
 }
-
-.lnk-landing-signin{
-	a{
-		padding-top: 15px;
-		font-family: Arial Rounded MT Light;
-		font-size:18px;
-    	color: #ffffff !important;
-    	text-decoration: none;
-    	display: inline-block;
-    	span{
-     	   font-size:18px;
-    	}
-	}
-}
-
 
 .learn-more-home-container{
 	padding: 18px 6px 6px 45px;
@@ -107,57 +118,14 @@ html, body {
 	width: 100%;
 }
 
-.container-bg-img{
-	background-color: #faf9f5;
-	font-family: Arial Rounded MT Bold;
-	font-size:21px;
-	img{
-	  width:100%;
-	  height:100%;
-	}
-	.carousel-caption{
-	  left: 0;
-      padding-bottom: 30px;
-      right: 55%;
-      top: 46%;
-	}
-	.info{
-	  opacity: 0.8;  /* Opacity for Modern Browsers */
-      filter: alpha(opacity=80);  /* Opacity for IE8 and lower */
-      zoom: 1;  /* Fix for IE7 */
-	  background-color: #61625D;
-	  margin-bottom: 2%;
-	  padding: 2% 0;
-	}
-}
-.info-with-img{
-	background: #faf9f5;
-	padding: 2% 0;
-	img{
-		width:160px; 
-		height:160px;
-	}
-	.content-center{
-		font-family: Arial Rounded MT Light;
-		font-size:40px;
-		color:#393939;
-		padding: 15px;
-	}
-}
-
-.color-text{color: #f25f5c;}
-.color-text-heading{
-	color: #f25f5c;
-	font-size:18px;
-}
-
+// Footer css ends here //
 
 .btn-start-exploring{
 	padding: 0 0 2% 0%;
 	a{
 		font-family: Arial Rounded MT Light;
 		font-size:26px;
-		background: #F35C5F;
+		background: #ff3019;
     border-radius: 12px;
     color: #ffffff;
     padding: 12px;
@@ -204,48 +172,72 @@ font-family: Arial Rounded MT Light;
 }
 
 
-.footer{
-	font-family: Arial Rounded MT Light;
-	font-size:16px;
-	padding :1% 0;
-	background-color: #3D3D3D;
-	color:#faf9f5;
-	a, a:hover{
-		color:#faf9f5;
-		text-decoration:none;
-	}
-}
 
+//.container-bg-img{
+//	background-color: #faf9f5;
+//	font-family: Arial Rounded MT Bold;
+//	font-size:21px;
+//	img{
+//	  width:100%;
+//	  height:100%;
+//	}
+//	.carousel-caption{
+//	  left: 0;
+//      padding-bottom: 30px;
+//      right: 55%;
+//      top: 46%;
+//	}
+//	.info{
+//	  opacity: 0.8;  /* Opacity for Modern Browsers */
+//      filter: alpha(opacity=80);  /* Opacity for IE8 and lower */
+//      zoom: 1;  /* Fix for IE7 */
+//	  background-color: #61625D;
+//	  margin-bottom: 2%;
+//	  padding: 2% 0;
+//	}
+//}
+//.info-with-img{
+//	background: #faf9f5;
+//	padding: 2% 0;
+//	img{
+//		width:160px;
+//		height:160px;
+//	}
+//	.content-center{
+//		font-family: Arial Rounded MT Light;
+//		font-size:40px;
+//		color:#393939;
+//		padding: 15px;
+//	}
+//}
+//
+//.color-text{color: #f25f5c;}
+//.color-text-heading{
+//	color: #f25f5c;
+//	font-size:18px;
+//}
+//
+//
 
-.header-36{
-	font-family: Arial Rounded MT Bold !important;
-	font-size:36px !important;
-}
+//
+//
 
+//
+//
 
-.content-21{
-	font-family: Arial Rounded MT Bold !important;
-	font-size:21px !important;
-}
-
-.content-24{
-	font-family: Arial Rounded MT Bold !important;
-	font-size:24px !important;
-}
-
-.required:after {
-   font-size: 20px;
-   color: red;
-   content: "*";
-   position: absolute;
-   padding: 0 0 0 5px;
-}
-
-//------------  Landing page CSS ends here  -----------------
-
-
-
-// ------------- Devise Flash Message CSS starts here ------------
+//.required:after {
+//   font-size: 20px;
+//   color: red;
+//   content: "*";
+//   position: absolute;
+//   padding: 0 0 0 5px;
+//}
+//
+////------------  Landing page CSS ends here  -----------------
+//
+//
+//
+//// ------------- Devise Flash Message CSS starts here ------------
 
 .alert-error {
     background-color: #f2dede;

@@ -1,8 +1,7 @@
-<div class="container-fluid fullHeight">
-  <div class="row jumbotron">
+<div class="container">
+  <div class="row">
 	  <% if current_user.blank? %>
 	  <% if @visitor.blank? %>
-	  	<div class="row"><br/></div>
 	  	<%= render partial: "dashboard/shared/pre_video_creation" %>
 	  <% else %>
 		<%= render partial: "dashboard/shared/post_video_creation", :locals => {:@visitor=>@visitor} %>
