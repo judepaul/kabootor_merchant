@@ -42,7 +42,7 @@ class VideoController < ApplicationController
   def visitor_video_details
     params.permit(:utf8, :authenticity_token, :page_type, :session_id, :video_name, :customer_type, :customer_name, :customer_email, :customer_phone)
     visitor = Visitor.where(media_server_session_id: params[:session_id]).last unless params[:session_id].blank?
-    if visitor.update_attributes(video_title: params[:video_name], receiver_name: params[:customer_name], receiver_email: params[:customer_email], receiver_phone: params[:customer_phone])
+    if visitor.update_attributes(video_title: params[:video_name], receiver_name: params[:customer_name], receiver_email: params[:customer_email], receiver_phone: params[:customer_phone], is_details: true)
     render json:
       {
         visitor_id: visitor.id,

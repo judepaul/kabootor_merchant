@@ -1,5 +1,149 @@
-<p>Welcome <%= @email %>!</p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Kabootor Registration Email</title>
+<style type="text/css">
+body {
+	margin:0;
+	padding:0;
+	background-color:#eeeeee;
+	color:#777777;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	-webkit-text-size-adjust:none;
+	-ms-text-size-adjust:none;
+}
+h1, h2 {
+	color:#3b5167;
+	margin-bottom:10px !important;
+}
+a, a:link, a:visited {
+	/*color:#5187bd;*/
+	text-decoration:none;
+}
+a:hover, a:active {
+	text-decoration:none;
+	/*color:#2868a9 !important;*/
+}
+p {
+	margin:0 0 14px 0;
+}
+img {
+	border:0;
+}
+table td {
+	border-collapse:collapse;
+}
+.highlighted {
+	background-color:#ffe69e;
+	color:#3b5167;
+	padding:2px 4px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+}
 
-<p>You can confirm your account email through the link below:</p>
+.tbl-background {
+    /*background: url(/assets/bg.jpg) no-repeat;*/
+}
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+.button {
+    /*background-color: #4CAF50;*/ /* Green */
+	background-color: #f44336;
+    border: none;
+    color: white;
+	font-color: white;
+	font-weight: bold;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+/*Hotmail and Yahoo specific code*/
+.ReadMsgBody {width: 100%;}
+.ExternalClass {width: 100%;}
+.yshortcuts {/*color: #5187bd;*/}
+.yshortcuts a span {/*color: #5187bd;*/ border-bottom: none !important; background: none !important;}
+/*Hotmail and Yahoo specific code*/
+</style>
+
+</head>
+
+<body background="images/bg.jpg">
+
+    <table id="pageContainer" class="tbl-background" width="100%" align="center" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; background-repeat:repeat; background-color:#eeeeee;">
+        <tr>
+            <td style="padding:30px 20px 40px 20px;">            
+                <!-- Start of logo, date, forward  and home links container -->
+                <table width="600" align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse; text-align:left; font-family:Arial, Helvetica, sans-serif; font-weight:normal; font-size:12px; line-height:15pt; color:#777777;">
+                    <tr>
+                        <td bgcolor="#000" colspan="2" height="7" style="font-size:2px; line-height:0px;">
+                        <!-- <!%= image_tag('blank.gif') %> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" bgcolor="#ffffff" width="600" valign="middle" style="padding-bottom:20px ; font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:100%; color:#5187bd; text-align:center;">                        
+                            <%= image_tag('logo-new.png', width:'100%') %>
+                      </td>                    
+                    </tr>
+                    <!-- <tr>
+                        <td colspan="2" height="11" style="font-size:2px; line-height:0px;"><img alt="" src="images/divider.png" height="11" width="600" align="left" border="0" vspace="0" hspace="0" style="display:block;" /></td>
+                    </tr> -->
+                </table>
+            	<!-- End of logo, date, forward  and home links container -->       	
+            	<!-- Start of text banner -->
+                <table bgcolor="#ffffff" width="600" align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse; text-align:left; font-family:Arial, Helvetica, sans-serif; font-weight:normal; font-size:12px; line-height:15pt; color:#777777;">
+                    <!-- <tr>
+                        <td style="font-family:Arial, Helvetica, sans-serif; font-size:25px; line-height:15pt; padding:20px; background-color:#5187bd;  color:#ffffff;">Verify your Email Address </td>
+                    </tr>
+                    <tr>
+                        <td height="11" style="font-size:2px; line-height:0px;"><img alt="" src="images/divider.png" height="11" width="600" align="left" border="0" vspace="0" hspace="0" style="display:block;" /></td>
+                    </tr> -->
+                </table>
+                <table bgcolor="#ffffff" width="600" align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse; text-align:left; font-family:Arial, Helvetica, sans-serif; font-weight:normal; font-size:12px; line-height:15pt; color:#777777;">
+                    <tr style="height:20px;"></tr>
+                    <tr>
+                        <td style="padding-right:30px; padding-left:30px; font-family:Arial,Helvetica, sans-serif; font-size:12px; line-height:15pt; color:#777777;">
+                            <p style="font-family:arial, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:20px; line-height:30pt; color:#000; font-weight:bold; margin-top:0; margin-bottom:10px !important; padding:0; text-indent:-3px;">Welcome <%= @email %>!</p>
+    					</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right:30px; padding-bottom:20px; padding-left:30px; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:15pt; color:#000;">						
+                            <p>Thank you for your registration</p>
+                            <p> Before you can access the kabootor service, you must first confirm your registration by clicking on the button below: </p>                      
+                        </td>
+                    </tr>                
+                    <tr>
+                        <td style="padding-top:5px; padding-right:30px; padding-bottom:35px; padding-left:30px; font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:15pt; color:#777777; text-align:center;">
+							<%= link_to "Confirm my Account", confirmation_url(@resource, confirmation_token: @token), class: "button" %>	
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right:30px; padding-bottom:20px; padding-left:30px; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:15pt; color:#000;">                        
+                            <p>Once you have verified your registration, you will use to access the kabootor from this point on. </p>                      
+                        </td>
+                    </tr>                
+                    <tr>
+                        <td style="padding-right:30px; padding-bottom:20px; padding-left:30px; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:15pt; color:#777777;">
+                            <strong>NOTE:</strong> If the above button does not appear, or does not open a new browser window when you click on it, copy this URL (<span style="color:#e35535;"><%=  confirmation_url(@resource, confirmation_token: @token) %></span>) and paste it into your browser’s address bar. 
+                            <br /><br />                        
+                            <p style="color:#000">If you have any questions or experience any problems with the registration process, please contact us.</p><br/>
+                             <p style="color:#000;">Thank you, <br />
+                              Kabootor Support <br/> support@kabootor.com </p>
+                        </td>
+                    </tr>                
+                </table>
+                <table bgcolor="#444444" width="600" align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse; text-align:left; font-family:Arial, Helvetica, sans-serif; font-weight:normal; font-size:12px; line-height:15pt; color:#cccccc;">
+                    <tr>
+                        <td bgcolor="#000" height="7" style="font-size:2px; line-height:0px;">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -45,6 +45,7 @@ class OpentokController < ApplicationController
       visitor.resource_uri = params[:url].gsub(/\?.*/, '') unless params[:url].blank?
       visitor.resource_size = params[:size]
       visitor.resource_length = params[:duration]
+      visitor.is_create_video = true
       visitor.save
     end
     
