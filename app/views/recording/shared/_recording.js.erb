@@ -101,7 +101,7 @@ $(document).ready(function() {
 		var posterImgURI = $('input[name=img_data]').val();
 	    // $(this).attr("disabled", "disabled");
 		$(this).addClass('disabled');
-	    this.innerHTML='<i class="fa fa-refresh fa-spin"></i> Next';
+	    // this.innerHTML='<i class="fa fa-refresh fa-spin"></i> Next';
 		// savePosterImgURI(session_id, archive_id, posterImgURI);
         setTimeout(
             function() {
@@ -131,7 +131,7 @@ $(document).ready(function() {
 		var validate_status = validate_video_detail_form();
 		if(validate_status){
 			$(this).addClass('disabled');
-		    this.innerHTML='<i class="fa fa-refresh fa-spin"></i> Next';
+		    // this.innerHTML='<i class="fa fa-refresh fa-spin"></i> Next';
 	        setTimeout(
 	            function() {
 	                // alert("Called after delay.");
